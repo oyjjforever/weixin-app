@@ -1,0 +1,737 @@
+<template>
+  <view class="page">
+    <!-- 状态栏 -->
+    <view class="status-bar">
+      <text class="time">16:04</text>
+      <view class="status-icons">
+        <image class="status-icon" src="/static/template/food-recipe/1.svg" mode="widthFix"></image>
+      </view>
+    </view>
+
+    <!-- 主要内容区域 -->
+    <scroll-view class="content" scroll-y="true" show-scrollbar="false">
+      <!-- 问候区域 -->
+      <view class="greeting-section">
+        <view class="greeting-text">
+          <text class="greeting-title">Hi! Dianne</text>
+          <text class="greeting-subtitle">What are you cooking today</text>
+        </view>
+        <view class="user-actions">
+          <view class="action-btn notification-btn">
+            <image class="action-icon" src="/static/template/food-recipe/2.svg" mode="widthFix"></image>
+          </view>
+          <view class="action-btn search-btn">
+            <image class="action-icon" src="/static/template/food-recipe/3.svg" mode="widthFix"></image>
+          </view>
+        </view>
+      </view>
+
+      <!-- 分类标签 -->
+      <view class="category-section">
+        <scroll-view class="category-scroll" scroll-x="true" show-scrollbar="false">
+          <view class="category-list">
+            <view 
+              class="category-item" 
+              :class="{ active: activeCategory === item.id }"
+              v-for="item in categories" 
+              :key="item.id"
+              @click="selectCategory(item.id)"
+            >
+              <text class="category-text">{{ item.name }}</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <!-- 热门食谱 -->
+      <view class="trending-section">
+        <text class="section-title">Trending Recipe</text>
+        <view class="trending-card">
+          <image class="trending-image" src="/static/template/food-recipe/23.png" mode="aspectFill"></image>
+          <view class="trending-overlay">
+            <view class="favorite-btn">
+              <image class="favorite-icon" src="/static/template/food-recipe/6.svg" mode="widthFix"></image>
+            </view>
+          </view>
+          <view class="trending-info">
+            <view class="recipe-details">
+              <text class="recipe-title">Salami and cheese pizza</text>
+              <text class="recipe-description">This is a quick overview of the ingredients...</text>
+            </view>
+            <view class="recipe-meta">
+              <view class="meta-item">
+                <image class="meta-icon" src="/static/template/food-recipe/4.svg" mode="widthFix"></image>
+                <text class="meta-text">30min</text>
+              </view>
+              <view class="meta-item">
+                <text class="rating-text">5</text>
+                <image class="meta-icon" src="/static/template/food-recipe/5.svg" mode="widthFix"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 用户食谱 -->
+      <view class="user-recipes-section">
+        <text class="section-title white">Your recipes</text>
+        <swiper class="recipes-swiper" :indicator-dots="false" :autoplay="false" :circular="false" :display-multiple-items="2" :spacing="10">
+          <swiper-item v-for="recipe in userRecipes" :key="recipe.id">
+            <view class="recipe-card">
+              <image class="recipe-image" :src="recipe.image" mode="aspectFill"></image>
+              <view class="recipe-favorite">
+                <image class="favorite-icon" :src="recipe.favorited ? '/static/template/food-recipe/9.svg' : '/static/template/food-recipe/6.svg'" mode="widthFix"></image>
+              </view>
+              <view class="recipe-info">
+                <text class="recipe-name">{{ recipe.name }}</text>
+                <view class="recipe-stats">
+                  <view class="stat-item">
+                    <text class="stat-text">{{ recipe.rating }}</text>
+                    <image class="stat-icon" src="/static/template/food-recipe/5.svg" mode="widthFix"></image>
+                  </view>
+                  <view class="stat-item">
+                    <image class="stat-icon" src="/static/template/food-recipe/8.svg" mode="widthFix"></image>
+                    <text class="stat-text">{{ recipe.time }}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
+      </view>
+
+      <!-- 顶级厨师 -->
+      <view class="top-chef-section">
+        <text class="section-title">Top Chef</text>
+        <swiper class="chef-swiper" :indicator-dots="false" :autoplay="false" :circular="false" :display-multiple-items="4">
+          <swiper-item v-for="chef in topChefs" :key="chef.id">
+            <view class="chef-item">
+              <image class="chef-avatar" :src="chef.avatar" mode="aspectFill"></image>
+              <text class="chef-name">{{ chef.name }}</text>
+            </view>
+          </swiper-item>
+        </swiper>
+      </view>
+
+      <!-- 最近添加 -->
+      <view class="recently-added-section">
+        <text class="section-title">Recently Added</text>
+        <swiper class="recent-swiper" :indicator-dots="false" :autoplay="false" :circular="false" :display-multiple-items="2" :spacing="10">
+          <swiper-item v-for="item in recentlyAdded" :key="item.id">
+            <view class="recent-card">
+              <image class="recent-image" :src="item.image" mode="aspectFill"></image>
+              <view class="recent-favorite">
+                <image class="favorite-icon" :src="item.favorited ? '/static/template/food-recipe/9.svg' : '/static/template/food-recipe/18.svg'" mode="widthFix"></image>
+              </view>
+              <view class="recent-info">
+                <text class="recent-title">{{ item.name }}</text>
+                <text class="recent-description">{{ item.description }}</text>
+                <view class="recent-meta">
+                  <view class="meta-item">
+                    <text class="rating-text">{{ item.rating }}</text>
+                    <image class="meta-icon" src="/static/template/food-recipe/5.svg" mode="widthFix"></image>
+                  </view>
+                  <view class="meta-item">
+                    <image class="meta-icon" src="/static/template/food-recipe/4.svg" mode="widthFix"></image>
+                    <text class="meta-text">{{ item.time }}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
+      </view>
+    </scroll-view>
+
+    <!-- 底部导航 -->
+    <view class="bottom-nav">
+      <view class="nav-item" :class="{ active: activeNav === 'home' }" @click="selectNav('home')">
+        <image class="nav-icon" src="/static/template/food-recipe/19.svg" mode="widthFix"></image>
+      </view>
+      <view class="nav-item" :class="{ active: activeNav === 'message' }" @click="selectNav('message')">
+        <image class="nav-icon" src="/static/template/food-recipe/20.svg" mode="widthFix"></image>
+      </view>
+      <view class="nav-item" :class="{ active: activeNav === 'bookmark' }" @click="selectNav('bookmark')">
+        <image class="nav-icon" src="/static/template/food-recipe/21.svg" mode="widthFix"></image>
+      </view>
+      <view class="nav-item" :class="{ active: activeNav === 'profile' }" @click="selectNav('profile')">
+        <image class="nav-icon" src="/static/template/food-recipe/22.svg" mode="widthFix"></image>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      activeCategory: 'breakfast',
+      activeNav: 'home',
+      categories: [
+        { id: 'breakfast', name: 'Breakfast' },
+        { id: 'lunch', name: 'Lunch' },
+        { id: 'dinner', name: 'Dinner' },
+        { id: 'vegan', name: 'Vegan' },
+        { id: 'dessert', name: 'Dessert' },
+        { id: 'drinks', name: 'Drinks' },
+        { id: 'seafood', name: 'Sea Food' }
+      ],
+      userRecipes: [
+        {
+          id: 1,
+          name: 'Chicken Burger',
+          image: '/static/template/food-recipe/7.png',
+          rating: 5,
+          time: '15min',
+          favorited: true
+        },
+        {
+          id: 2,
+          name: 'Tiramisu',
+          image: '/static/template/food-recipe/10.png',
+          rating: 5,
+          time: '15min',
+          favorited: true
+        },
+        {
+          id: 3,
+          name: 'Pasta Salad',
+          image: '/static/template/food-recipe/24.png',
+          rating: 4,
+          time: '20min',
+          favorited: false
+        },
+        {
+          id: 4,
+          name: 'Fruit Smoothie',
+          image: '/static/template/food-recipe/25.png',
+          rating: 5,
+          time: '10min',
+          favorited: true
+        }
+      ],
+      topChefs: [
+        { id: 1, name: 'Joseph', avatar: '/static/template/food-recipe/14.png' },
+        { id: 2, name: 'Andrew', avatar: '/static/template/food-recipe/15.png' },
+        { id: 3, name: 'Emily', avatar: '/static/template/food-recipe/16.png' },
+        { id: 4, name: 'Jessica', avatar: '/static/template/food-recipe/17.png' }
+      ],
+      recentlyAdded: [
+        {
+          id: 1,
+          name: 'Lemonade',
+          description: 'Acidic and refreshing',
+          image: '/static/template/food-recipe/24.png',
+          rating: 4,
+          time: '30min',
+          favorited: true
+        },
+        {
+          id: 2,
+          name: 'Orange Juice',
+          description: 'Fresh and vitamin rich',
+          image: '/static/template/food-recipe/25.png',
+          rating: 4,
+          time: '15min',
+          favorited: false
+        },
+        {
+          id: 3,
+          name: 'Green Smoothie',
+          description: 'Healthy and nutritious',
+          image: '/static/template/food-recipe/7.png',
+          rating: 5,
+          time: '10min',
+          favorited: true
+        },
+        {
+          id: 4,
+          name: 'Berry Mix',
+          description: 'Sweet and antioxidant',
+          image: '/static/template/food-recipe/10.png',
+          rating: 5,
+          time: '20min',
+          favorited: false
+        }
+      ]
+    }
+  },
+  methods: {
+    selectCategory(categoryId) {
+      this.activeCategory = categoryId
+    },
+    selectNav(navId) {
+      this.activeNav = navId
+    }
+  }
+}
+</script>
+
+<style>
+.page {
+  flex: 1;
+  background-color: #FFFDF9;
+}
+
+/* 状态栏 */
+.status-bar {
+  height: 32px;
+  padding: 0 37px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FFFDF9;
+}
+
+.time {
+  font-size: 13px;
+  font-family: 'League Spartan';
+  font-weight: 500;
+  color: #32201C;
+}
+
+.status-icons {
+  flex-direction: row;
+  align-items: center;
+}
+
+.status-icon {
+  width: 20px;
+  height: 12px;
+  margin-left: 4px;
+}
+
+/* 主要内容 */
+.content {
+  flex: 1;
+  padding: 0 36px;
+}
+
+/* 问候区域 */
+.greeting-section {
+  height: 55px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 19px;
+}
+
+.greeting-text {
+  flex: 1;
+}
+
+.greeting-title {
+  font-size: 25px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #FD5D69;
+  line-height: 30px;
+}
+
+.greeting-subtitle {
+  font-size: 13px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #32201C;
+  line-height: 20px;
+}
+
+.user-actions {
+  flex-direction: row;
+  align-items: center;
+}
+
+.action-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  background-color: #FD5D69;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.action-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* 分类标签 */
+.category-section {
+  margin-top: 19px;
+  height: 39px;
+}
+
+.category-scroll {
+  height: 100%;
+}
+
+.category-list {
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+}
+
+.category-item {
+  height: 25px;
+  padding: 0 18px;
+  border-radius: 18px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 11px;
+}
+
+.category-item.active {
+  background-color: #FD5D69;
+}
+
+.category-text {
+  font-size: 16px;
+  font-family: 'League Spartan';
+  font-weight: 400;
+  color: #FD5D69;
+}
+
+.category-item.active .category-text {
+  color: white;
+}
+
+/* 热门食谱 */
+.trending-section {
+  margin-top: 39px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-family: 'Poppins';
+  font-weight: 500;
+  color: #FD5D69;
+  margin-bottom: 16px;
+}
+
+.section-title.white {
+  color: #FFFDF9;
+}
+
+.trending-card {
+  position: relative;
+  height: 182px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.trending-image {
+  width: 100%;
+  height: 143px;
+  border-radius: 14px;
+}
+
+.trending-overlay {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+}
+
+.favorite-btn {
+  width: 29px;
+  height: 29px;
+  border-radius: 14.5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.favorite-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.trending-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 49px;
+  background-color: #FFFDF9;
+  border: 1px solid #EC888D;
+  border-top: none;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  padding: 12px 15px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recipe-details {
+  flex: 1;
+}
+
+.recipe-title {
+  font-size: 13px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #32201C;
+  line-height: 16px;
+}
+
+.recipe-description {
+  font-size: 13px;
+  font-family: 'League Spartan';
+  font-weight: 300;
+  color: #32201C;
+  line-height: 15px;
+}
+
+.recipe-meta {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.meta-item {
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.meta-icon {
+  width: 10px;
+  height: 10px;
+  margin-left: 4px;
+}
+
+.meta-text {
+  font-size: 12px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #EC888D;
+}
+
+.rating-text {
+  font-size: 12px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #EC888D;
+}
+
+/* 用户食谱 */
+.user-recipes-section {
+  margin-top: 19px;
+  background-color: #FD5D69;
+  border-radius: 20px;
+  padding: 14px 16px 16px;
+}
+
+.recipes-swiper {
+  height: 195px;
+  width: 100%;
+}
+
+.recipe-card {
+  width: 150px;
+  height: 195px;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 162px;
+}
+
+.recipe-favorite {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 29px;
+  height: 29px;
+  border-radius: 14.5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.recipe-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background-color: #FFFDF9;
+  border-radius: 13px;
+  padding: 5px 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.recipe-name {
+  font-size: 12px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #1C0F0D;
+  line-height: 15px;
+}
+
+.recipe-stats {
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.stat-item {
+  flex-direction: row;
+  align-items: center;
+  margin-right: 26px;
+}
+
+.stat-text {
+  font-size: 12px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #EC888D;
+}
+
+.stat-icon {
+  width: 10px;
+  height: 10px;
+  margin-left: 2px;
+}
+
+/* 顶级厨师 */
+.top-chef-section {
+  margin-top: 19px;
+}
+
+.chef-swiper {
+  height: 94px;
+  width: 100%;
+}
+
+.chef-item {
+  width: 83px;
+  height: 94px;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.chef-avatar {
+  width: 83px;
+  height: 74px;
+  border-radius: 7px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.chef-name {
+  font-size: 12px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #32201C;
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* 最近添加 */
+.recently-added-section {
+  margin-top: 19px;
+  margin-bottom: 100px;
+}
+
+.recent-swiper {
+  height: 226px;
+  width: 100%;
+}
+
+.recent-card {
+  width: 150px;
+  height: 226px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.recent-image {
+  width: 100%;
+  height: 153px;
+  border-radius: 14px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.recent-favorite {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 29px;
+  height: 29px;
+  border-radius: 14.5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.recent-info {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+  height: 76px;
+  background-color: #FFFDF9;
+  border: 1px solid #EC888D;
+  border-top: none;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  padding: 6px 15px;
+}
+
+.recent-title {
+  font-size: 12px;
+  font-family: 'Poppins';
+  font-weight: 400;
+  color: #3E2823;
+  line-height: 15px;
+}
+
+.recent-description {
+  font-size: 13px;
+  font-family: 'League Spartan';
+  font-weight: 300;
+  color: #3E2823;
+  line-height: 15px;
+  margin-top: 3px;
+}
+
+.recent-meta {
+  flex-direction: row;
+  align-items: center;
+  margin-top: 12px;
+}
+
+/* 底部导航 */
+.bottom-nav {
+  position: fixed;
+  bottom: 36px;
+  left: 75px;
+  right: 75px;
+  height: 56px;
+  background-color: #FD5D69;
+  border-radius: 33px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-item {
+  width: 26px;
+  height: 26px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.nav-item.active .nav-icon {
+  opacity: 1;
+}
+</style>

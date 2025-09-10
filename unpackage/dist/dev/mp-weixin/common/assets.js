@@ -1,0 +1,26 @@
+"use strict";
+const _imports_0 = "/static/template/food-recipe/1.svg";
+const _imports_1 = "/static/template/food-recipe/2.svg";
+const _imports_2 = "/static/template/food-recipe/3.svg";
+const _imports_3 = "/static/template/food-recipe/23.png";
+const _imports_4 = "/static/template/food-recipe/6.svg";
+const _imports_5 = "/static/template/food-recipe/4.svg";
+const _imports_6 = "/static/template/food-recipe/5.svg";
+const _imports_7 = "/static/template/food-recipe/8.svg";
+const _imports_8 = "/static/template/food-recipe/19.svg";
+const _imports_9 = "/static/template/food-recipe/20.svg";
+const _imports_10 = "/static/template/food-recipe/21.svg";
+const _imports_11 = "/static/template/food-recipe/22.svg";
+exports._imports_0 = _imports_0;
+exports._imports_1 = _imports_1;
+exports._imports_10 = _imports_10;
+exports._imports_11 = _imports_11;
+exports._imports_2 = _imports_2;
+exports._imports_3 = _imports_3;
+exports._imports_4 = _imports_4;
+exports._imports_5 = _imports_5;
+exports._imports_6 = _imports_6;
+exports._imports_7 = _imports_7;
+exports._imports_8 = _imports_8;
+exports._imports_9 = _imports_9;
+//# sourceMappingURL=../../.sourcemap/mp-weixin/common/assets.js.map
