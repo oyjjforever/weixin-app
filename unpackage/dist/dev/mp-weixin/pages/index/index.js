@@ -61,6 +61,11 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         url: `/pages/index/detail?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&description=${encodeURIComponent(product.description)}&designer=${encodeURIComponent(product.designer)}&rating=${product.rating}`
       });
     };
+    const viewCaseDetail = () => {
+      common_vendor.index.navigateTo({
+        url: "/pages/case/detail"
+      });
+    };
     return (_ctx, _cache) => {
       return {
         a: common_vendor.p({
@@ -92,7 +97,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             f: index
           };
         }),
-        e: common_vendor.f(productList.value, (item, index, i0) => {
+        e: common_vendor.o(viewCaseDetail),
+        f: common_vendor.f(productList.value, (item, index, i0) => {
           return {
             a: item.image,
             b: common_vendor.t(item.name),
@@ -113,12 +119,12 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             m: common_vendor.o(($event) => goToDetail(item), index)
           };
         }),
-        f: common_vendor.p({
+        g: common_vendor.p({
           type: "calendar",
           size: "14",
           color: "#999"
         }),
-        g: common_vendor.p({
+        h: common_vendor.p({
           type: "star",
           size: "14",
           color: "#ff4757"

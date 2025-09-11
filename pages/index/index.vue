@@ -33,7 +33,7 @@
     <view class="recommend-section">
       <view class="section-header">
         <text class="section-title">热门推荐</text>
-        <text class="see-all">查看全部</text>
+        <text class="see-all" @click="viewCaseDetail">案例详情</text>
       </view>
       <scroll-view class="product-list" scroll-y>
         <view v-for="(item, index) in productList" :key="index" class="product-card" @click="goToDetail(item)">
@@ -125,6 +125,13 @@ const productList = ref([
 const goToDetail = (product: any) => {
   uni.navigateTo({
     url: `/pages/index/detail?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&description=${encodeURIComponent(product.description)}&designer=${encodeURIComponent(product.designer)}&rating=${product.rating}`
+  });
+};
+
+// 跳转到案例详情页
+const viewCaseDetail = () => {
+  uni.navigateTo({
+    url: '/pages/case/detail'
   });
 };
 </script>

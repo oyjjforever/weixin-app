@@ -14,21 +14,16 @@
 			}
 		},
 		{
-			"path": "pages/message/message",
+			"path": "pages/case/index",
 			"style": {
-				"navigationBarTitleText": "消息"
+				"navigationBarTitleText": "案例详情",
+				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path": "pages/category/category",
+			"path": "pages/contact/index",
 			"style": {
-				"navigationBarTitleText": "分类"
-			}
-		},
-		{
-			"path": "pages/profile/profile",
-			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "联系我们"
 			}
 		}
 	],
@@ -49,16 +44,12 @@
 				"text": "首页"
 			},
 			{
-				"pagePath": "pages/message/message",
-				"text": "消息"
+				"pagePath": "pages/case/index",
+				"text": "案例"
 			},
 			{
-				"pagePath": "pages/category/category",
-				"text": "分类"
-			},
-			{
-				"pagePath": "pages/profile/profile",
-				"text": "我的"
+				"pagePath": "pages/contact/index",
+				"text": "联系我们"
 			}
 		]
 	},

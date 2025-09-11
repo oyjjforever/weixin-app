@@ -176,6 +176,19 @@ page {
   z-index: 100;
 }
 
+.nav-left {
+  display: flex;
+  align-items: center;
+  padding: 10rpx;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.nav-left:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 .nav-right {
   display: flex;
   gap: 40rpx;

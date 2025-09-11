@@ -2,9 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/index/detail",
-    "pages/message/message",
-    "pages/category/category",
-    "pages/profile/profile"
+    "pages/case/index",
+    "pages/contact/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -23,16 +22,12 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/message/message",
-        "text": "消息"
+        "pagePath": "pages/case/index",
+        "text": "案例"
       },
       {
-        "pagePath": "pages/category/category",
-        "text": "分类"
-      },
-      {
-        "pagePath": "pages/profile/profile",
-        "text": "我的"
+        "pagePath": "pages/contact/index",
+        "text": "联系我们"
       }
     ]
   },
