@@ -9,12 +9,11 @@
     "postcss": false,
     "minified": false,
     "newFeature": true,
-    "bigPackageSizeSupport": true,
-    "minifyWXML": true
+    "bigPackageSizeSupport": true
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "touristappid",
+  "appid": "wx9a24d690a28a25e3",
   "projectname": "lxjj-app",
   "condition": {
     "search": {
