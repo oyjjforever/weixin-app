@@ -5,7 +5,7 @@ if (!Array) {
   _component_uni_icons();
 }
 const _sfc_defineComponent = common_vendor.defineComponent({
-  __name: "index",
+  __name: "list",
   setup(__props) {
     const loading = common_vendor.ref(false);
     const hasMore = common_vendor.ref(true);
@@ -147,12 +147,12 @@ const _sfc_defineComponent = common_vendor.defineComponent({
             b: common_vendor.t(item.roomType),
             c: common_vendor.t(item.title),
             d: common_vendor.t(item.description),
-            e: "298d1d60-2-" + i0,
+            e: "97c1bee0-2-" + i0,
             f: common_vendor.t(item.area),
-            g: "298d1d60-3-" + i0,
+            g: "97c1bee0-3-" + i0,
             h: common_vendor.t(item.designer),
             i: common_vendor.t(item.price),
-            j: "298d1d60-4-" + i0,
+            j: "97c1bee0-4-" + i0,
             k: common_vendor.o(($event) => viewDetail(item), index),
             l: index,
             m: common_vendor.o(($event) => viewDetail(item), index)
@@ -198,4 +198,4 @@ const _sfc_defineComponent = common_vendor.defineComponent({
 });
 _sfc_defineComponent.__runtimeHooks = 1;
 wx.createPage(_sfc_defineComponent);
-//# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/case/index.js.map
+//# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/case/list.js.map

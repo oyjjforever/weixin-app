@@ -16,6 +16,12 @@
 		{
 			"path": "pages/case/index",
 			"style": {
+				"navigationBarTitleText": "家具案例"
+			}
+		},
+		{
+			"path": "pages/case/detail",
+			"style": {
 				"navigationBarTitleText": "案例详情",
 				"navigationStyle": "custom"
 			}

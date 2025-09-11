@@ -33,7 +33,7 @@
     <view class="recommend-section">
       <view class="section-header">
         <text class="section-title">热门推荐</text>
-        <text class="see-all" @click="viewCaseDetail">案例详情</text>
+        <text class="see-all" @click="viewCaseList">查看案例</text>
       </view>
       <scroll-view class="product-list" scroll-y>
         <view v-for="(item, index) in productList" :key="index" class="product-card" @click="goToDetail(item)">
@@ -132,6 +132,13 @@ const goToDetail = (product: any) => {
 const viewCaseDetail = () => {
   uni.navigateTo({
     url: '/pages/case/detail'
+  });
+};
+
+// 跳转到案例列表页
+const viewCaseList = () => {
+  uni.navigateTo({
+    url: '/pages/case/index'
   });
 };
 </script>

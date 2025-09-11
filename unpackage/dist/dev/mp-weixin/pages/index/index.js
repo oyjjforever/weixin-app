@@ -61,9 +61,9 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         url: `/pages/index/detail?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&description=${encodeURIComponent(product.description)}&designer=${encodeURIComponent(product.designer)}&rating=${product.rating}`
       });
     };
-    const viewCaseDetail = () => {
+    const viewCaseList = () => {
       common_vendor.index.navigateTo({
-        url: "/pages/case/detail"
+        url: "/pages/case/index"
       });
     };
     return (_ctx, _cache) => {
@@ -97,7 +97,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             f: index
           };
         }),
-        e: common_vendor.o(viewCaseDetail),
+        e: common_vendor.o(viewCaseList),
         f: common_vendor.f(productList.value, (item, index, i0) => {
           return {
             a: item.image,

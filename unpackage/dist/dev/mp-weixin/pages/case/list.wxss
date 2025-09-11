@@ -8,9 +8,6 @@ page {
   flex-direction: column;
   height: 100vh;
   background-color: #F8F8F8;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
 }
 
 /* 顶部导航 */
@@ -64,8 +61,6 @@ page {
 .case-list {
   flex: 1;
   padding: 20rpx 30rpx;
-  box-sizing: border-box;
-  width: 100%;
 }
 .case-item {
   background-color: #ffffff;
@@ -74,8 +69,6 @@ page {
   overflow: hidden;
   box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-  width: 100%;
-  box-sizing: border-box;
 }
 .case-item:active {
   transform: translateY(2rpx);
@@ -110,8 +103,6 @@ page {
 /* 案例信息 */
 .case-info {
   padding: 32rpx;
-  width: 100%;
-  box-sizing: border-box;
 }
 .case-title {
   display: block;
@@ -157,13 +148,9 @@ page {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  box-sizing: border-box;
 }
 .price-section {
   flex: 1;
-  min-width: 0;
-  margin-right: 20rpx;
 }
 .price-label {
   display: block;
@@ -195,8 +182,6 @@ page {
   font-size: 14px;
   color: #666666;
   transition: all 0.3s ease;
-  flex-shrink: 0;
-  white-space: nowrap;
 }
 .detail-btn:active {
   background-color: #e8e8e8;

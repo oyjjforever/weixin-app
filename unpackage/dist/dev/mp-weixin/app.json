@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/index/detail",
     "pages/case/index",
+    "pages/case/detail",
     "pages/contact/index"
   ],
   "window": {
