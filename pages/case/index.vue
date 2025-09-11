@@ -312,6 +312,7 @@ page {
   padding: 20rpx 30rpx;
   box-sizing: border-box;
   width: 100%;
+  overflow: auto;
 }
 
 .case-item {

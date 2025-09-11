@@ -210,7 +210,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             c: common_vendor.f(5, (star, k1, i1) => {
               return {
                 a: star,
-                b: "1447c843-4-" + i0 + "-" + i1,
+                b: "66a46f64-4-" + i0 + "-" + i1,
                 c: common_vendor.p({
                   type: star <= review.rating ? "star-filled" : "star",
                   size: "12",
