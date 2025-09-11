@@ -1,1 +1,0 @@
-{"version":3,"file":"justify-content.js","sources":["../../../Program Files/HBuilderX/plugins/uniapp-cli-vite/uniPage:/cGFnZXNcQ1NTXGZsZXhcanVzdGlmeS1jb250ZW50LnV2dWU"],"sourcesContent":["import MiniProgramPage from 'W:/Workplace/2.小程序/lihai-app/pages/CSS/flex/justify-content.uvue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;;;AACA,GAAG,WAAW,eAAe;"}

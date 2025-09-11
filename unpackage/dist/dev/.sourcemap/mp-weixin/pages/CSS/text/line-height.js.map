@@ -1,1 +1,0 @@
-{"version":3,"file":"line-height.js","sources":["../../../Program Files/HBuilderX/plugins/uniapp-cli-vite/uniPage:/cGFnZXNcQ1NTXHRleHRcbGluZS1oZWlnaHQudXZ1ZQ"],"sourcesContent":["import MiniProgramPage from 'W:/Workplace/2.小程序/lihai-app/pages/CSS/text/line-height.uvue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;;;AACA,GAAG,WAAW,eAAe;"}

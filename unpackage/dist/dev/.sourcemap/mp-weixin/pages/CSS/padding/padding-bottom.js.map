@@ -1,1 +1,0 @@
-{"version":3,"file":"padding-bottom.js","sources":["../../../Program Files/HBuilderX/plugins/uniapp-cli-vite/uniPage:/cGFnZXNcQ1NTXHBhZGRpbmdccGFkZGluZy1ib3R0b20udXZ1ZQ"],"sourcesContent":["import MiniProgramPage from 'W:/Workplace/2.小程序/lihai-app/pages/CSS/padding/padding-bottom.uvue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;;;AACA,GAAG,WAAW,eAAe;"}

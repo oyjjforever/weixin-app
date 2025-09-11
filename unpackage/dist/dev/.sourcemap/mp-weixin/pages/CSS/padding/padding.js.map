@@ -1,1 +1,0 @@
-{"version":3,"file":"padding.js","sources":["../../../Program Files/HBuilderX/plugins/uniapp-cli-vite/uniPage:/cGFnZXNcQ1NTXHBhZGRpbmdccGFkZGluZy51dnVl"],"sourcesContent":["import MiniProgramPage from 'W:/Workplace/2.小程序/lihai-app/pages/CSS/padding/padding.uvue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;;;AACA,GAAG,WAAW,eAAe;"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"scale.js","sources":["../../../Program Files/HBuilderX/plugins/uniapp-cli-vite/uniPage:/cGFnZXNcQ1NTXHRyYW5zZm9ybVxzY2FsZS51dnVl"],"sourcesContent":["import MiniProgramPage from 'W:/Workplace/2.小程序/lihai-app/pages/CSS/transform/scale.uvue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;;;AACA,GAAG,WAAW,eAAe;"}

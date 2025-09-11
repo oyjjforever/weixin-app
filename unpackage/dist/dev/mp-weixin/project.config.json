@@ -9,12 +9,13 @@
     "postcss": false,
     "minified": false,
     "newFeature": true,
-    "bigPackageSizeSupport": true
+    "bigPackageSizeSupport": true,
+    "minifyWXML": true
   },
   "compileType": "miniprogram",
-  "libVersion": "3.7.1",
+  "libVersion": "",
   "appid": "touristappid",
-  "projectname": "lihai-app",
+  "projectname": "lxjj-app",
   "condition": {
     "search": {
       "current": -1,
@@ -29,15 +30,8 @@
       "list": []
     },
     "miniprogram": {
-      "current": 0,
-      "list": [
-        {
-          "name": "",
-          "path": "",
-          "query": "",
-          "id": 0
-        }
-      ]
+      "current": -1,
+      "list": []
     }
   }
 }
