@@ -1,0 +1,95 @@
+{
+  "bsonType": "object",
+  "required": ["name", "image", "description", "designer"],
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "name": {
+      "bsonType": "string",
+      "description": "产品名称",
+      "title": "产品名称"
+    },
+    "image": {
+      "bsonType": "string",
+      "description": "产品图片",
+      "title": "产品图片"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "产品描述",
+      "title": "产品描述"
+    },
+    "designer": {
+      "bsonType": "string",
+      "description": "设计师",
+      "title": "设计师"
+    },
+    "duration": {
+      "bsonType": "string",
+      "description": "工期",
+      "title": "工期"
+    },
+    "difficulty": {
+      "bsonType": "string",
+      "description": "难度",
+      "title": "难度"
+    },
+    "rating": {
+      "bsonType": "string",
+      "description": "评分",
+      "title": "评分"
+    },
+    "price": {
+      "bsonType": "string",
+      "description": "价格",
+      "title": "价格"
+    },
+    "sales": {
+      "bsonType": "string",
+      "description": "销量",
+      "title": "销量"
+    },
+    "size": {
+      "bsonType": "string",
+      "description": "尺寸",
+      "title": "尺寸"
+    },
+    "material": {
+      "bsonType": "string",
+      "description": "材质",
+      "title": "材质"
+    },
+    "color": {
+      "bsonType": "string",
+      "description": "颜色",
+      "title": "颜色"
+    },
+    "features": {
+      "bsonType": "array",
+      "description": "产品特点",
+      "title": "产品特点",
+      "items": {
+        "bsonType": "string"
+      }
+    },
+    "sceneDesc": {
+      "bsonType": "string",
+      "description": "适用场景描述",
+      "title": "适用场景描述"
+    },
+    "isFavorite": {
+      "bsonType": "bool",
+      "description": "是否收藏",
+      "title": "是否收藏",
+      "defaultValue": false
+    },
+    "create_date": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

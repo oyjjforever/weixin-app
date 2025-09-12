@@ -1,0 +1,169 @@
+[
+  {
+    "title": "现代简约三居室设计",
+    "description": "采用简约现代的设计理念，以白色和木色为主调，营造温馨舒适的居住环境",
+    "image": "https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg",
+    "price": "28999",
+    "area": "120㎡",
+    "roomType": "三居室",
+    "designer": "张设计师",
+    "style": "modern",
+    "ownerIntro": "业主是一对年轻夫妇，喜欢简约现代的设计风格，希望打造一个温馨舒适的家居环境。整体设计以白色和木色为主调，营造出清新自然的居住氛围。",
+    "mainImages": [
+      "https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg",
+      "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg",
+      "https://ai-public.mastergo.com/ai/img_res/388e0156db63597b1973c1350cd9c481.jpg"
+    ],
+    "sceneImages": [
+      {
+        "image": "https://ai-public.mastergo.com/ai/img_res/1e5fec8a19efbdfbefb12ee291ef018b.jpg",
+        "productTag": "北欧沙发"
+      },
+      {
+        "image": "https://ai-public.mastergo.com/ai/img_res/8879b790c22c0d5ff7111d49605bb460.jpg",
+        "productTag": "实木餐桌"
+      },
+      {
+        "image": "https://ai-public.mastergo.com/ai/img_res/1c1e7a581bc7d9c42ef0bb607f629998.jpg",
+        "productTag": "现代床具"
+      }
+    ],
+    "furnitureCategories": [
+      {
+        "name": "客厅家具",
+        "products": [
+          {
+            "name": "北欧布艺沙发",
+            "description": "舒适透气，简约设计",
+            "price": "3299",
+            "image": "https://ai-public.mastergo.com/ai/img_res/388e0156db63597b1973c1350cd9c481.jpg"
+          },
+          {
+            "name": "实木茶几",
+            "description": "天然木纹，环保材质",
+            "price": "1299",
+            "image": "https://ai-public.mastergo.com/ai/img_res/1e5fec8a19efbdfbefb12ee291ef018b.jpg"
+          }
+        ]
+      },
+      {
+        "name": "餐厅家具",
+        "products": [
+          {
+            "name": "现代餐桌椅",
+            "description": "简约时尚，实用美观",
+            "price": "2899",
+            "image": "https://ai-public.mastergo.com/ai/img_res/8879b790c22c0d5ff7111d49605bb460.jpg"
+          }
+        ]
+      }
+    ],
+    "designerSuggestions": ["简约实用", "色彩和谐", "空间通透", "收纳充足"],
+    "colorPalette": [
+      {
+        "name": "主色调",
+        "hex": "#f8f9fa"
+      },
+      {
+        "name": "辅助色",
+        "hex": "#6c757d"
+      },
+      {
+        "name": "点缀色",
+        "hex": "#ff4757"
+      }
+    ],
+    "overallRating": 4.8,
+    "userReviews": [
+      {
+        "username": "张女士",
+        "avatar": "https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg",
+        "rating": 5,
+        "content": "设计师的搭配很棒，整体效果超出预期！",
+        "images": ["https://ai-public.mastergo.com/ai/img_res/1c1e7a581bc7d9c42ef0bb607f629998.jpg"]
+      }
+    ],
+    "similarCases": [
+      {
+        "name": "北欧风格案例",
+        "image": "https://ai-public.mastergo.com/ai/img_res/c84ea737066317a8897310195bdc631f.jpg",
+        "caseId": "2"
+      },
+      {
+        "name": "现代简约案例",
+        "image": "https://ai-public.mastergo.com/ai/img_res/9d886b79a87c8166e8abefb2781eee5c.jpg",
+        "caseId": "3"
+      }
+    ],
+    "isFavorite": false,
+    "viewCount": 156
+  },
+  {
+    "title": "北欧风格两居室",
+    "description": "清新自然的北欧风格，注重功能性与美观性的完美结合",
+    "image": "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg",
+    "price": "22999",
+    "area": "85㎡",
+    "roomType": "两居室",
+    "designer": "李设计师",
+    "style": "nordic",
+    "ownerIntro": "业主追求简洁自然的生活方式，喜欢北欧风格的清新感。设计师运用大量白色和原木色，营造出舒适宜人的居住空间。",
+    "mainImages": [
+      "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg",
+      "https://ai-public.mastergo.com/ai/img_res/c84ea737066317a8897310195bdc631f.jpg"
+    ],
+    "sceneImages": [
+      {
+        "image": "https://ai-public.mastergo.com/ai/img_res/c84ea737066317a8897310195bdc631f.jpg",
+        "productTag": "北欧餐桌"
+      }
+    ],
+    "furnitureCategories": [
+      {
+        "name": "客厅家具",
+        "products": [
+          {
+            "name": "北欧简约沙发",
+            "description": "清新自然，舒适实用",
+            "price": "2899",
+            "image": "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg"
+          }
+        ]
+      }
+    ],
+    "designerSuggestions": ["自然清新", "功能实用", "色彩简洁", "光线充足"],
+    "colorPalette": [
+      {
+        "name": "主色调",
+        "hex": "#ffffff"
+      },
+      {
+        "name": "辅助色",
+        "hex": "#f5f5dc"
+      },
+      {
+        "name": "点缀色",
+        "hex": "#87ceeb"
+      }
+    ],
+    "overallRating": 4.6,
+    "userReviews": [
+      {
+        "username": "李先生",
+        "avatar": "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg",
+        "rating": 5,
+        "content": "北欧风格很棒，住起来很舒服！",
+        "images": []
+      }
+    ],
+    "similarCases": [
+      {
+        "name": "现代简约案例",
+        "image": "https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg",
+        "caseId": "1"
+      }
+    ],
+    "isFavorite": false,
+    "viewCount": 89
+  }
+]

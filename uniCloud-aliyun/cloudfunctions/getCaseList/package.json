@@ -1,0 +1,7 @@
+{
+  "name": "getCaseList",
+  "version": "1.0.0",
+  "description": "获取案例列表",
+  "main": "index.js",
+  "dependencies": {}
+}

@@ -10,7 +10,6 @@
 			"path": "pages/index/detail",
 			"style": {
 				"navigationBarTitleText": "产品详情",
-				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -23,7 +22,6 @@
 			"path": "pages/case/detail",
 			"style": {
 				"navigationBarTitleText": "案例详情",
-				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -41,20 +39,26 @@
 	},
 	"tabBar": {
 		"color": "#999999",
-		"selectedColor": "#ff4757",
+		"selectedColor": "#1096db",
 		"backgroundColor": "#ffffff",
 		"borderStyle": "black",
 		"list": [
 			{
 				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home_.png",
 				"text": "首页"
 			},
 			{
 				"pagePath": "pages/case/index",
+				"iconPath": "static/tabbar/case.png",
+				"selectedIconPath": "static/tabbar/case_.png",
 				"text": "案例"
 			},
 			{
 				"pagePath": "pages/contact/index",
+				"iconPath": "static/tabbar/contact.png",
+				"selectedIconPath": "static/tabbar/contact_.png",
 				"text": "联系我们"
 			}
 		]

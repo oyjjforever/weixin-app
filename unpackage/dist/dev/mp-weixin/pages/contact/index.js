@@ -11,10 +11,10 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       common_vendor.index.openLocation({
         latitude: 31.234527,
         longitude: 121.501608,
-        name: "示例店铺",
-        address: "上海市浦东新区陆家嘴环路1000号",
+        name: "丽祥家居",
+        address: "福州市晋安区福兴大道5号茶花现代家居建材广场二楼C36丽祥家居",
         success: () => {
-          common_vendor.index.__f__("log", "at pages/contact/index.vue:58", "导航成功");
+          common_vendor.index.__f__("log", "at pages/contact/index.vue:71", "导航成功");
         },
         fail: () => {
           common_vendor.index.showToast({
@@ -26,15 +26,54 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
     const handleCall = () => {
       common_vendor.index.makePhoneCall({
-        phoneNumber: "021-88888888",
+        phoneNumber: "17759186806",
         success: () => {
-          common_vendor.index.__f__("log", "at pages/contact/index.vue:73", "拨打电话成功");
+          common_vendor.index.__f__("log", "at pages/contact/index.vue:86", "拨打电话成功");
         },
         fail: () => {
           common_vendor.index.showToast({
             title: "拨打电话失败",
             icon: "none"
           });
+        }
+      });
+    };
+    const handleWechat = () => {
+      common_vendor.index.showActionSheet({
+        itemList: ["复制微信号", "保存二维码", "查看联系方式"],
+        success: (res) => {
+          switch (res.tapIndex) {
+            case 0:
+              common_vendor.index.setClipboardData({
+                data: "LXJJ193",
+                // 替换为实际的微信号
+                success: () => {
+                  common_vendor.index.showModal({
+                    title: "微信号已复制",
+                    content: '请打开微信，点击右上角"+"号，选择"添加朋友"，粘贴微信号即可添加',
+                    showCancel: false,
+                    confirmText: "知道了"
+                  });
+                }
+              });
+              break;
+            case 1:
+              common_vendor.index.showModal({
+                title: "微信二维码",
+                content: "长按保存二维码图片，在微信中扫码添加好友",
+                showCancel: false,
+                confirmText: "知道了"
+              });
+              break;
+            case 2:
+              common_vendor.index.showModal({
+                title: "联系方式",
+                content: "微信号：LXJJ193，电话：17759186806，地址：福州市晋安区福兴大道5号茶花现代家居建材广场二楼C36丽祥家居",
+                showCancel: false,
+                confirmText: "知道了"
+              });
+              break;
+          }
         }
       });
     };
@@ -63,6 +102,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         }),
         f: common_vendor.o(handleCall),
         g: common_vendor.p({
+          type: "chat",
+          size: "24",
+          color: "#3498db"
+        }),
+        h: common_vendor.p({
+          type: "right",
+          size: "16",
+          color: "#999"
+        }),
+        i: common_vendor.o(handleWechat),
+        j: common_vendor.p({
           type: "calendar",
           size: "24",
           color: "#3498db"

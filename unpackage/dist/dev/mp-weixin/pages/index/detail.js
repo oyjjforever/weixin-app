@@ -7,35 +7,45 @@ if (!Array) {
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "detail",
   setup(__props) {
-    const productInfo = common_vendor.ref({
-      id: "",
-      name: "北欧简约实木餐桌椅组合",
-      image: "",
-      description: "采用进口白橡木材质，简约大气的北欧风格设计，适合多种家居风格，打造温馨舒适的用餐环境。",
-      designer: "设计师",
-      rating: "4.8"
-    });
-    const swiperList = common_vendor.ref([
-      "https://ai-public.mastergo.com/ai/img_res/1c1e7a581bc7d9c42ef0bb607f629998.jpg",
-      "https://ai-public.mastergo.com/ai/img_res/c84ea737066317a8897310195bdc631f.jpg",
-      "https://ai-public.mastergo.com/ai/img_res/9d886b79a87c8166e8abefb2781eee5c.jpg"
-    ]);
+    const productInfo = common_vendor.ref();
+    const swiperList = common_vendor.ref([]);
+    const getProductDetail = async (productId) => {
+      try {
+        const result = await common_vendor.nr.callFunction({
+          name: "getProductDetail",
+          data: { id: productId }
+        });
+        if (result.result.code === 0) {
+          const product = result.result.data;
+          productInfo.value = {
+            id: product._id,
+            name: product.name,
+            image: product.image,
+            description: product.description,
+            designer: product.designer,
+            rating: product.rating,
+            price: product.price,
+            sales: product.sales,
+            size: product.size,
+            material: product.material,
+            color: product.color,
+            features: product.features || [],
+            sceneDesc: product.sceneDesc
+          };
+          if (product.image) {
+            swiperList.value.unshift(product.image);
+          }
+        }
+      } catch (error) {
+        common_vendor.index.__f__("error", "at pages/index/detail.vue:122", "获取产品详情失败:", error);
+      }
+    };
     common_vendor.onMounted(() => {
       const pages = getCurrentPages();
       const currentPage = pages[pages.length - 1];
       const options = currentPage.options;
-      if (options) {
-        productInfo.value = {
-          id: options.id || "",
-          name: decodeURIComponent(options.name || "北欧简约实木餐桌椅组合"),
-          image: decodeURIComponent(options.image || ""),
-          description: decodeURIComponent(options.description || "采用进口白橡木材质，简约大气的北欧风格设计，适合多种家居风格，打造温馨舒适的用餐环境。"),
-          designer: decodeURIComponent(options.designer || "设计师"),
-          rating: options.rating || "4.8"
-        };
-        if (productInfo.value.image) {
-          swiperList.value.unshift(productInfo.value.image);
-        }
+      if (options && options.id) {
+        getProductDetail(options.id);
       }
     });
     const goBack = () => {
@@ -86,14 +96,26 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         }),
         h: common_vendor.o(previewImage),
         i: common_vendor.t(productInfo.value.name),
-        j: common_vendor.p({
+        j: common_vendor.t(productInfo.value.price),
+        k: common_vendor.t(productInfo.value.sales),
+        l: common_vendor.p({
           type: "star-filled",
           size: "14",
           color: "#FFB800"
         }),
-        k: common_vendor.t(productInfo.value.rating),
-        l: common_vendor.t(productInfo.value.description),
-        m: common_vendor.t(productInfo.value.designer)
+        m: common_vendor.t(productInfo.value.rating),
+        n: common_vendor.t(productInfo.value.description),
+        o: common_vendor.t(productInfo.value.designer),
+        p: common_vendor.t(productInfo.value.size),
+        q: common_vendor.t(productInfo.value.material),
+        r: common_vendor.t(productInfo.value.color),
+        s: common_vendor.f(productInfo.value.features, (tag, k0, i0) => {
+          return {
+            a: common_vendor.t(tag),
+            b: tag
+          };
+        }),
+        t: common_vendor.t(productInfo.value.sceneDesc)
       };
     };
   }

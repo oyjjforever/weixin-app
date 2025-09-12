@@ -1,0 +1,9 @@
+{
+  "name": "getProductDetail",
+  "version": "1.0.0",
+  "description": "获取产品详情",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "author": ""
+}

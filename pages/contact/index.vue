@@ -9,7 +9,7 @@
           <uni-icons class="card-icon" type="location" size="24" color="#3498db"/>
           <view class="info-content">
             <text class="info-label">店铺地址</text>
-            <text class="info-detail">上海市浦东新区陆家嘴环路1000号</text>
+            <text class="info-detail">福州市晋安区福兴大道5号茶花现代家居建材广场二楼C36丽祥家居</text>
           </view>
         </view>
         <uni-icons class="arrow-icon" type="right" size="16" color="#999"/>
@@ -22,7 +22,20 @@
           <uni-icons class="card-icon" type="phone" size="24" color="#3498db"/>
           <view class="info-content">
             <text class="info-label">联系电话</text>
-            <text class="info-detail">021-88888888</text>
+            <text class="info-detail">17759186806</text>
+          </view>
+        </view>
+        <uni-icons class="arrow-icon" type="right" size="16" color="#999"/>
+      </view>
+    </view>
+
+    <view class="contact-card" @click="handleWechat">
+      <view class="card-content">
+        <view class="card-left">
+          <uni-icons class="card-icon" type="chat" size="24" color="#3498db"/>
+          <view class="info-content">
+            <text class="info-label">联系微信</text>
+            <text class="info-detail">点击添加微信好友</text>
           </view>
         </view>
         <uni-icons class="arrow-icon" type="right" size="16" color="#999"/>
@@ -35,7 +48,7 @@
           <uni-icons class="card-icon" type="calendar" size="24" color="#3498db"/>
           <view class="info-content">
             <text class="info-label">营业时间</text>
-            <text class="info-detail">周一至周日 10:00-22:00</text>
+            <text class="info-detail">周一至周日 9:00-18:00</text>
           </view>
         </view>
       </view>
@@ -52,8 +65,8 @@ const handleNavigate = () => {
   uni.openLocation({
     latitude: 31.234527,
     longitude: 121.501608,
-    name: '示例店铺',
-    address: '上海市浦东新区陆家嘴环路1000号',
+    name: '丽祥家居',
+    address: '福州市晋安区福兴大道5号茶花现代家居建材广场二楼C36丽祥家居',
     success: () => {
       console.log('导航成功')
     },
@@ -68,7 +81,7 @@ const handleNavigate = () => {
 
 const handleCall = () => {
   uni.makePhoneCall({
-    phoneNumber: '021-88888888',
+    phoneNumber: '17759186806',
     success: () => {
       console.log('拨打电话成功')
     },
@@ -77,6 +90,49 @@ const handleCall = () => {
         title: '拨打电话失败',
         icon: 'none'
       })
+    }
+  })
+}
+
+const handleWechat = () => {
+  // 显示操作选择弹窗
+  uni.showActionSheet({
+    itemList: ['复制微信号', '保存二维码', '查看联系方式'],
+    success: (res) => {
+      switch (res.tapIndex) {
+        case 0:
+          // 复制微信号
+          uni.setClipboardData({
+            data: 'LXJJ193', // 替换为实际的微信号
+            success: () => {
+              uni.showModal({
+                title: '微信号已复制',
+                content: '请打开微信，点击右上角"+"号，选择"添加朋友"，粘贴微信号即可添加',
+                showCancel: false,
+                confirmText: '知道了'
+              })
+            }
+          })
+          break
+        case 1:
+          // 保存二维码（这里可以显示二维码图片）
+          uni.showModal({
+            title: '微信二维码',
+            content: '长按保存二维码图片，在微信中扫码添加好友',
+            showCancel: false,
+            confirmText: '知道了'
+          })
+          break
+        case 2:
+          // 显示详细联系方式
+          uni.showModal({
+            title: '联系方式',
+            content: '微信号：LXJJ193，电话：17759186806，地址：福州市晋安区福兴大道5号茶花现代家居建材广场二楼C36丽祥家居',
+            showCancel: false,
+            confirmText: '知道了'
+          })
+          break
+      }
     }
   })
 }

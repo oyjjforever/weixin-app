@@ -1,0 +1,43 @@
+{
+  "bsonType": "object",
+  "required": ["image", "title", "description"],
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "image": {
+      "bsonType": "string",
+      "description": "轮播图片",
+      "title": "轮播图片"
+    },
+    "title": {
+      "bsonType": "string",
+      "description": "标题",
+      "title": "标题"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "描述",
+      "title": "描述"
+    },
+    "isFavorite": {
+      "bsonType": "bool",
+      "description": "是否收藏",
+      "title": "是否收藏",
+      "defaultValue": false
+    },
+    "sort": {
+      "bsonType": "int",
+      "description": "排序",
+      "title": "排序",
+      "defaultValue": 0
+    },
+    "create_date": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

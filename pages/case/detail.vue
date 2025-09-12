@@ -181,14 +181,6 @@
     <view class="back-to-top" v-show="showBackToTop" @click="scrollToTop">
       <uni-icons type="up" size="24" color="#ffffff"/>
     </view>
-
-    <!-- 快速导航菜单 -->
-    <view class="quick-nav" v-show="showQuickNav">
-      <view class="nav-item" @click="scrollToSection('case-content')">案例详情</view>
-      <view class="nav-item" @click="scrollToSection('furniture')">家具产品</view>
-      <view class="nav-item" @click="scrollToSection('suggestion')">搭配建议</view>
-      <view class="nav-item" @click="scrollToSection('review')">用户评价</view>
-    </view>
   </view>
 </template>
 
@@ -198,75 +190,117 @@ import { ref, onMounted } from 'vue';
 // 页面数据
 const isFavorite = ref(false);
 const showBackToTop = ref(false);
-const showQuickNav = ref(false);
+const loading = ref(false);
+const caseId = ref('');
 
 // 案例基本信息
-const caseInfo = ref({
-  title: '现代简约三居室设计',
-  roomType: '三居室',
-  area: '120㎡',
-  style: '现代简约',
-  ownerIntro: '业主是一对年轻夫妇，喜欢简约现代的设计风格，希望打造一个温馨舒适的家居环境。整体设计以白色和木色为主调，营造出清新自然的居住氛围。'
-});
+const caseInfo = ref({});
 
 // 主轮播图
-const mainImages = ref([
-  'https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg',
-  'https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg',
-  'https://ai-public.mastergo.com/ai/img_res/388e0156db63597b1973c1350cd9c481.jpg'
-]);
+const mainImages = ref([]);
 
 // 实景图展示
-const sceneImages = ref([
-  { image: 'https://ai-public.mastergo.com/ai/img_res/1e5fec8a19efbdfbefb12ee291ef018b.jpg', productTag: '北欧沙发' },
-  { image: 'https://ai-public.mastergo.com/ai/img_res/8879b790c22c0d5ff7111d49605bb460.jpg', productTag: '实木餐桌' },
-  { image: 'https://ai-public.mastergo.com/ai/img_res/1c1e7a581bc7d9c42ef0bb607f629998.jpg', productTag: '现代床具' }
-]);
+const sceneImages = ref([]);
 
 // 家具分类
-const furnitureCategories = ref([
-  {
-    name: '客厅家具',
-    products: [
-      { name: '北欧布艺沙发', description: '舒适透气，简约设计', price: '3299', image: 'https://ai-public.mastergo.com/ai/img_res/388e0156db63597b1973c1350cd9c481.jpg' },
-      { name: '实木茶几', description: '天然木纹，环保材质', price: '1299', image: 'https://ai-public.mastergo.com/ai/img_res/1e5fec8a19efbdfbefb12ee291ef018b.jpg' }
-    ]
-  },
-  {
-    name: '餐厅家具',
-    products: [
-      { name: '现代餐桌椅', description: '简约时尚，实用美观', price: '2899', image: 'https://ai-public.mastergo.com/ai/img_res/8879b790c22c0d5ff7111d49605bb460.jpg' }
-    ]
-  }
-]);
+const furnitureCategories = ref([]);
 
 // 设计师建议
-const designerSuggestions = ref(['简约实用', '色彩和谐', '空间通透', '收纳充足']);
+const designerSuggestions = ref([]);
 
 // 色彩搭配
-const colorPalette = ref([
-  { name: '主色调', hex: '#f8f9fa' },
-  { name: '辅助色', hex: '#6c757d' },
-  { name: '点缀色', hex: '#ff4757' }
-]);
+const colorPalette = ref([]);
 
 // 用户评价
 const overallRating = ref(4.8);
-const userReviews = ref([
-  {
-    username: '张女士',
-    avatar: 'https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg',
-    rating: 5,
-    content: '设计师的搭配很棒，整体效果超出预期！',
-    images: ['https://ai-public.mastergo.com/ai/img_res/1c1e7a581bc7d9c42ef0bb607f629998.jpg']
-  }
-]);
+const userReviews = ref([]);
 
 // 相似案例
-const similarCases = ref([
-  { name: '北欧风格案例', image: 'https://ai-public.mastergo.com/ai/img_res/c84ea737066317a8897310195bdc631f.jpg' },
-  { name: '现代简约案例', image: 'https://ai-public.mastergo.com/ai/img_res/9d886b79a87c8166e8abefb2781eee5c.jpg' }
-]);
+const similarCases = ref([]);
+
+// 获取案例详情数据
+const getCaseDetail = async (id: string) => {
+  if (!id) return;
+  
+  loading.value = true;
+  
+  try {
+    const result = await uniCloud.callFunction({
+      name: 'getCaseDetail',
+      data: { id }
+    });
+    
+    if (result.result.code === 0) {
+      const caseData = result.result.data;
+      
+      // 更新案例基本信息
+      caseInfo.value = {
+        title: caseData.title,
+        roomType: caseData.roomType,
+        area: caseData.area,
+        style: caseData.style,
+        ownerIntro: caseData.ownerIntro
+      };
+      
+      // 更新轮播图
+      if (caseData.mainImages && caseData.mainImages.length > 0) {
+        mainImages.value = caseData.mainImages;
+      }
+      
+      // 更新实景图
+      if (caseData.sceneImages && caseData.sceneImages.length > 0) {
+        sceneImages.value = caseData.sceneImages;
+      }
+      
+      // 更新家具分类
+      if (caseData.furnitureCategories && caseData.furnitureCategories.length > 0) {
+        furnitureCategories.value = caseData.furnitureCategories;
+      }
+      
+      // 更新设计师建议
+      if (caseData.designerSuggestions && caseData.designerSuggestions.length > 0) {
+        designerSuggestions.value = caseData.designerSuggestions;
+      }
+      
+      // 更新色彩搭配
+      if (caseData.colorPalette && caseData.colorPalette.length > 0) {
+        colorPalette.value = caseData.colorPalette;
+      }
+      
+      // 更新用户评价
+      if (caseData.overallRating) {
+        overallRating.value = caseData.overallRating;
+      }
+      if (caseData.userReviews && caseData.userReviews.length > 0) {
+        userReviews.value = caseData.userReviews;
+      }
+      
+      // 更新相似案例
+      if (caseData.similarCases && caseData.similarCases.length > 0) {
+        similarCases.value = caseData.similarCases;
+      }
+      
+      // 更新收藏状态
+      if (caseData.isFavorite !== undefined) {
+        isFavorite.value = caseData.isFavorite;
+      }
+      
+    } else {
+      uni.showToast({
+        title: result.result.message || '获取案例详情失败',
+        icon: 'none'
+      });
+    }
+  } catch (error) {
+    console.error('获取案例详情失败:', error);
+    uni.showToast({
+      title: '网络错误，请重试',
+      icon: 'none'
+    });
+  } finally {
+    loading.value = false;
+  }
+};
 
 // 方法定义
 const goBack = () => {
@@ -317,10 +351,16 @@ const viewMoreReviews = () => {
 };
 
 const viewSimilarCase = (caseItem: any) => {
-  uni.showToast({
-    title: `查看${caseItem.name}`,
-    icon: 'none'
-  });
+  if (caseItem.caseId) {
+    uni.navigateTo({
+      url: `/pages/case/detail?id=${caseItem.caseId}`
+    });
+  } else {
+    uni.showToast({
+      title: `查看${caseItem.name}`,
+      icon: 'none'
+    });
+  }
 };
 
 const scrollToTop = () => {
@@ -344,6 +384,18 @@ const previewReviewImage = (images: string[], index: number) => {
     current: images[index]
   });
 };
+
+// 页面初始化
+onMounted(() => {
+  const pages = getCurrentPages();
+  const currentPage = pages[pages.length - 1];
+  const options = currentPage.options;
+  
+  if (options && options.id) {
+    caseId.value = options.id;
+    getCaseDetail(options.id);
+  }
+});
 </script>
 
 <style>

@@ -1,0 +1,16 @@
+[
+  {
+    "image": "https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg",
+    "title": "现代简约客厅",
+    "description": "打造舒适优雅的生活空间，细节彰显品质",
+    "isFavorite": true,
+    "sort": 1
+  },
+  {
+    "image": "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg",
+    "title": "精致厨房设计",
+    "description": "高端定制厨房，让烹饪更有格调",
+    "isFavorite": false,
+    "sort": 2
+  }
+]

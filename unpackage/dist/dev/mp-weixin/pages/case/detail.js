@@ -9,59 +9,78 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   setup(__props) {
     const isFavorite = common_vendor.ref(false);
     const showBackToTop = common_vendor.ref(false);
-    const showQuickNav = common_vendor.ref(false);
-    const caseInfo = common_vendor.ref({
-      title: "现代简约三居室设计",
-      roomType: "三居室",
-      area: "120㎡",
-      style: "现代简约",
-      ownerIntro: "业主是一对年轻夫妇，喜欢简约现代的设计风格，希望打造一个温馨舒适的家居环境。整体设计以白色和木色为主调，营造出清新自然的居住氛围。"
-    });
-    const mainImages = common_vendor.ref([
-      "https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg",
-      "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg",
-      "https://ai-public.mastergo.com/ai/img_res/388e0156db63597b1973c1350cd9c481.jpg"
-    ]);
-    const sceneImages = common_vendor.ref([
-      { image: "https://ai-public.mastergo.com/ai/img_res/1e5fec8a19efbdfbefb12ee291ef018b.jpg", productTag: "北欧沙发" },
-      { image: "https://ai-public.mastergo.com/ai/img_res/8879b790c22c0d5ff7111d49605bb460.jpg", productTag: "实木餐桌" },
-      { image: "https://ai-public.mastergo.com/ai/img_res/1c1e7a581bc7d9c42ef0bb607f629998.jpg", productTag: "现代床具" }
-    ]);
-    const furnitureCategories = common_vendor.ref([
-      {
-        name: "客厅家具",
-        products: [
-          { name: "北欧布艺沙发", description: "舒适透气，简约设计", price: "3299", image: "https://ai-public.mastergo.com/ai/img_res/388e0156db63597b1973c1350cd9c481.jpg" },
-          { name: "实木茶几", description: "天然木纹，环保材质", price: "1299", image: "https://ai-public.mastergo.com/ai/img_res/1e5fec8a19efbdfbefb12ee291ef018b.jpg" }
-        ]
-      },
-      {
-        name: "餐厅家具",
-        products: [
-          { name: "现代餐桌椅", description: "简约时尚，实用美观", price: "2899", image: "https://ai-public.mastergo.com/ai/img_res/8879b790c22c0d5ff7111d49605bb460.jpg" }
-        ]
-      }
-    ]);
-    const designerSuggestions = common_vendor.ref(["简约实用", "色彩和谐", "空间通透", "收纳充足"]);
-    const colorPalette = common_vendor.ref([
-      { name: "主色调", hex: "#f8f9fa" },
-      { name: "辅助色", hex: "#6c757d" },
-      { name: "点缀色", hex: "#ff4757" }
-    ]);
+    const loading = common_vendor.ref(false);
+    const caseId = common_vendor.ref("");
+    const caseInfo = common_vendor.ref({});
+    const mainImages = common_vendor.ref([]);
+    const sceneImages = common_vendor.ref([]);
+    const furnitureCategories = common_vendor.ref([]);
+    const designerSuggestions = common_vendor.ref([]);
+    const colorPalette = common_vendor.ref([]);
     const overallRating = common_vendor.ref(4.8);
-    const userReviews = common_vendor.ref([
-      {
-        username: "张女士",
-        avatar: "https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg",
-        rating: 5,
-        content: "设计师的搭配很棒，整体效果超出预期！",
-        images: ["https://ai-public.mastergo.com/ai/img_res/1c1e7a581bc7d9c42ef0bb607f629998.jpg"]
+    const userReviews = common_vendor.ref([]);
+    const similarCases = common_vendor.ref([]);
+    const getCaseDetail = async (id) => {
+      if (!id)
+        return;
+      loading.value = true;
+      try {
+        const result = await common_vendor.nr.callFunction({
+          name: "getCaseDetail",
+          data: { id }
+        });
+        if (result.result.code === 0) {
+          const caseData = result.result.data;
+          caseInfo.value = {
+            title: caseData.title,
+            roomType: caseData.roomType,
+            area: caseData.area,
+            style: caseData.style,
+            ownerIntro: caseData.ownerIntro
+          };
+          if (caseData.mainImages && caseData.mainImages.length > 0) {
+            mainImages.value = caseData.mainImages;
+          }
+          if (caseData.sceneImages && caseData.sceneImages.length > 0) {
+            sceneImages.value = caseData.sceneImages;
+          }
+          if (caseData.furnitureCategories && caseData.furnitureCategories.length > 0) {
+            furnitureCategories.value = caseData.furnitureCategories;
+          }
+          if (caseData.designerSuggestions && caseData.designerSuggestions.length > 0) {
+            designerSuggestions.value = caseData.designerSuggestions;
+          }
+          if (caseData.colorPalette && caseData.colorPalette.length > 0) {
+            colorPalette.value = caseData.colorPalette;
+          }
+          if (caseData.overallRating) {
+            overallRating.value = caseData.overallRating;
+          }
+          if (caseData.userReviews && caseData.userReviews.length > 0) {
+            userReviews.value = caseData.userReviews;
+          }
+          if (caseData.similarCases && caseData.similarCases.length > 0) {
+            similarCases.value = caseData.similarCases;
+          }
+          if (caseData.isFavorite !== void 0) {
+            isFavorite.value = caseData.isFavorite;
+          }
+        } else {
+          common_vendor.index.showToast({
+            title: result.result.message || "获取案例详情失败",
+            icon: "none"
+          });
+        }
+      } catch (error) {
+        common_vendor.index.__f__("error", "at pages/case/detail.vue:295", "获取案例详情失败:", error);
+        common_vendor.index.showToast({
+          title: "网络错误，请重试",
+          icon: "none"
+        });
+      } finally {
+        loading.value = false;
       }
-    ]);
-    const similarCases = common_vendor.ref([
-      { name: "北欧风格案例", image: "https://ai-public.mastergo.com/ai/img_res/c84ea737066317a8897310195bdc631f.jpg" },
-      { name: "现代简约案例", image: "https://ai-public.mastergo.com/ai/img_res/9d886b79a87c8166e8abefb2781eee5c.jpg" }
-    ]);
+    };
     const goBack = () => {
       common_vendor.index.navigateBack();
     };
@@ -103,21 +122,21 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       });
     };
     const viewSimilarCase = (caseItem) => {
-      common_vendor.index.showToast({
-        title: `查看${caseItem.name}`,
-        icon: "none"
-      });
+      if (caseItem.caseId) {
+        common_vendor.index.navigateTo({
+          url: `/pages/case/detail?id=${caseItem.caseId}`
+        });
+      } else {
+        common_vendor.index.showToast({
+          title: `查看${caseItem.name}`,
+          icon: "none"
+        });
+      }
     };
     const scrollToTop = () => {
       common_vendor.index.pageScrollTo({
         scrollTop: 0,
         duration: 300
-      });
-    };
-    const scrollToSection = (sectionId) => {
-      common_vendor.index.showToast({
-        title: `跳转到${sectionId}`,
-        icon: "none"
       });
     };
     const previewReviewImage = (images, index) => {
@@ -126,6 +145,15 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         current: images[index]
       });
     };
+    common_vendor.onMounted(() => {
+      const pages = getCurrentPages();
+      const currentPage = pages[pages.length - 1];
+      const options = currentPage.options;
+      if (options && options.id) {
+        caseId.value = options.id;
+        getCaseDetail(options.id);
+      }
+    });
     return (_ctx, _cache) => {
       return {
         a: common_vendor.f(mainImages.value, (item, index, i0) => {
@@ -210,7 +238,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             c: common_vendor.f(5, (star, k1, i1) => {
               return {
                 a: star,
-                b: "66a46f64-4-" + i0 + "-" + i1,
+                b: "1447c843-4-" + i0 + "-" + i1,
                 c: common_vendor.p({
                   type: star <= review.rating ? "star-filled" : "star",
                   size: "12",
@@ -266,12 +294,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           color: "#ffffff"
         }),
         E: showBackToTop.value,
-        F: common_vendor.o(scrollToTop),
-        G: common_vendor.o(($event) => scrollToSection("case-content")),
-        H: common_vendor.o(($event) => scrollToSection("furniture")),
-        I: common_vendor.o(($event) => scrollToSection("suggestion")),
-        J: common_vendor.o(($event) => scrollToSection("review")),
-        K: showQuickNav.value
+        F: common_vendor.o(scrollToTop)
       };
     };
   }

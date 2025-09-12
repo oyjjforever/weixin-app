@@ -88,8 +88,25 @@
 
       <!-- 空状态 -->
       <view class="empty-state" v-if="caseList.length === 0 && !loading">
-        <uni-icons type="info" size="48" color="#ccc"/>
-        <text class="empty-text">暂无案例数据</text>
+        <view class="empty-content">
+          <uni-icons type="home" size="80" color="#d9d9d9"/>
+          <text class="empty-title">暂无案例数据</text>
+          <text class="empty-desc">当前筛选条件下没有找到相关案例</text>
+          <view class="empty-actions">
+            <view class="empty-action" @click="resetFilter">
+              <text class="action-text">重置筛选</text>
+            </view>
+            <view class="empty-action primary" @click="refreshCases">
+              <text class="action-text">刷新数据</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 加载状态 -->
+      <view class="loading-state" v-if="loading && caseList.length === 0">
+        <uni-icons type="spinner-cycle" size="40" color="#999"/>
+        <text class="loading-text">正在加载案例...</text>
       </view>
     </scroll-view>
 
@@ -108,6 +125,8 @@ const loading = ref(false);
 const hasMore = ref(true);
 const showBackToTop = ref(false);
 const selectedFilter = ref('all');
+const currentPage = ref(1);
+const pageSize = ref(10);
 
 // 筛选选项
 const filterOptions = ref([
@@ -120,74 +139,52 @@ const filterOptions = ref([
 ]);
 
 // 案例列表数据
-const caseList = ref([
-  {
-    id: 1,
-    title: '现代简约三居室设计',
-    description: '采用简约现代的设计理念，以白色和木色为主调，营造温馨舒适的居住环境',
-    image: 'https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg',
-    price: '28999',
-    area: '120㎡',
-    roomType: '三居室',
-    designer: '张设计师',
-    style: 'modern'
-  },
-  {
-    id: 2,
-    title: '北欧风格两居室',
-    description: '清新自然的北欧风格，注重功能性与美观性的完美结合',
-    image: 'https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg',
-    price: '22999',
-    area: '85㎡',
-    roomType: '两居室',
-    designer: '李设计师',
-    style: 'nordic'
-  },
-  {
-    id: 3,
-    title: '轻奢美式四居室',
-    description: '融合现代与传统的美式风格，展现优雅与舒适的生活品味',
-    image: 'https://ai-public.mastergo.com/ai/img_res/388e0156db63597b1973c1350cd9c481.jpg',
-    price: '45999',
-    area: '150㎡',
-    roomType: '四居室',
-    designer: '王设计师',
-    style: 'american'
-  },
-  {
-    id: 4,
-    title: '新中式风格别墅',
-    description: '传统文化与现代生活的完美融合，彰显东方美学魅力',
-    image: 'https://ai-public.mastergo.com/ai/img_res/1e5fec8a19efbdfbefb12ee291ef018b.jpg',
-    price: '68999',
-    area: '200㎡',
-    roomType: '别墅',
-    designer: '陈设计师',
-    style: 'chinese'
-  },
-  {
-    id: 5,
-    title: '欧式古典大宅',
-    description: '奢华典雅的欧式风格，每一处细节都体现贵族气质',
-    image: 'https://ai-public.mastergo.com/ai/img_res/8879b790c22c0d5ff7111d49605bb460.jpg',
-    price: '89999',
-    area: '280㎡',
-    roomType: '大宅',
-    designer: '刘设计师',
-    style: 'european'
-  },
-  {
-    id: 6,
-    title: '工业风格loft',
-    description: '粗犷与精致并存的工业风格，展现个性化的生活态度',
-    image: 'https://ai-public.mastergo.com/ai/img_res/1c1e7a581bc7d9c42ef0bb607f629998.jpg',
-    price: '35999',
-    area: '110㎡',
-    roomType: 'Loft',
-    designer: '赵设计师',
-    style: 'industrial'
+const caseList = ref([]);
+
+// 获取案例列表数据
+const getCaseList = async (isRefresh = false) => {
+  if (loading.value) return;
+  
+  loading.value = true;
+  
+  try {
+    const result = await uniCloud.callFunction({
+      name: 'getCaseList',
+      data: {
+        page: isRefresh ? 1 : currentPage.value,
+        pageSize: pageSize.value,
+        style: selectedFilter.value
+      }
+    });
+    
+    if (result.result.code === 0) {
+      const { cases, hasMore: more } = result.result.data;
+      
+      if (isRefresh) {
+        caseList.value = cases || [];
+        currentPage.value = 1;
+      } else {
+        caseList.value = [...caseList.value, ...(cases || [])];
+      }
+      
+      hasMore.value = more;
+      currentPage.value++;
+    } else {
+      uni.showToast({
+        title: result.result.message || '获取案例列表失败',
+        icon: 'none'
+      });
+    }
+  } catch (error) {
+    console.error('获取案例列表失败:', error);
+    uni.showToast({
+      title: '网络错误，请重试',
+      icon: 'none'
+    });
+  } finally {
+    loading.value = false;
   }
-]);
+};
 
 // 方法定义
 const goBack = () => {
@@ -196,29 +193,19 @@ const goBack = () => {
 
 const selectFilter = (value: string) => {
   selectedFilter.value = value;
-  // 这里可以添加筛选逻辑
-  uni.showToast({
-    title: `筛选：${filterOptions.value.find(item => item.value === value)?.label}`,
-    icon: 'none'
-  });
+  currentPage.value = 1;
+  getCaseList(true); // 重新获取数据
 };
 
 const viewDetail = (caseItem: any) => {
   uni.navigateTo({
-    url: `/pages/case/detail?id=${caseItem.id}&title=${encodeURIComponent(caseItem.title)}`
+    url: `/pages/case/detail?id=${caseItem._id || caseItem.id}`
   });
 };
 
 const loadMore = () => {
   if (loading.value || !hasMore.value) return;
-  
-  loading.value = true;
-  // 模拟加载更多数据
-  setTimeout(() => {
-    // 这里可以添加更多数据
-    loading.value = false;
-    hasMore.value = false; // 模拟没有更多数据
-  }, 1000);
+  getCaseList(false);
 };
 
 const scrollToTop = () => {
@@ -228,13 +215,26 @@ const scrollToTop = () => {
   });
 };
 
+// 重置筛选条件
+const resetFilter = () => {
+  selectedFilter.value = 'all';
+  currentPage.value = 1;
+  getCaseList(true);
+};
+
+// 刷新案例数据
+const refreshCases = () => {
+  currentPage.value = 1;
+  getCaseList(true);
+};
+
 // 监听页面滚动
 const onPageScroll = (e: any) => {
   showBackToTop.value = e.scrollTop > 500;
 };
 
 onMounted(() => {
-  // 页面加载完成后的初始化操作
+  getCaseList(true);
 });
 </script>
 
@@ -481,16 +481,79 @@ page {
 
 .empty-state {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 500rpx;
+  padding: 60rpx 40rpx;
+}
+
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.empty-title {
+  font-size: 18px;
+  color: #666;
+  font-weight: 500;
+  margin: 32rpx 0 16rpx;
+}
+
+.empty-desc {
+  font-size: 14px;
+  color: #999;
+  line-height: 1.5;
+  margin-bottom: 48rpx;
+  max-width: 400rpx;
+}
+
+.empty-actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.empty-action {
+  padding: 16rpx 24rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.empty-action.primary {
+  background-color: #B87D4B;
+  border-color: #B87D4B;
+}
+
+.empty-action.primary .action-text {
+  color: #fff;
+}
+
+.empty-action:active {
+  transform: scale(0.98);
+}
+
+.action-text {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 加载状态 */
+.loading-state {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 120rpx 40rpx;
 }
 
-.empty-text {
-  margin-top: 20rpx;
+.loading-text {
+  margin-top: 24rpx;
   font-size: 14px;
-  color: #999999;
+  color: #999;
 }
 
 /* 返回顶部按钮 */

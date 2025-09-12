@@ -1,0 +1,225 @@
+{
+  "bsonType": "object",
+  "required": ["title", "description", "image", "price", "area", "roomType", "designer", "style"],
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "title": {
+      "bsonType": "string",
+      "description": "案例标题",
+      "title": "案例标题"
+    },
+    "description": {
+      "bsonType": "string",
+      "description": "案例描述",
+      "title": "案例描述"
+    },
+    "image": {
+      "bsonType": "string",
+      "description": "案例主图",
+      "title": "案例主图"
+    },
+    "price": {
+      "bsonType": "string",
+      "description": "套餐价格",
+      "title": "套餐价格"
+    },
+    "area": {
+      "bsonType": "string",
+      "description": "面积",
+      "title": "面积"
+    },
+    "roomType": {
+      "bsonType": "string",
+      "description": "房型",
+      "title": "房型"
+    },
+    "designer": {
+      "bsonType": "string",
+      "description": "设计师",
+      "title": "设计师"
+    },
+    "style": {
+      "bsonType": "string",
+      "description": "设计风格",
+      "title": "设计风格"
+    },
+    "ownerIntro": {
+      "bsonType": "string",
+      "description": "业主简介",
+      "title": "业主简介"
+    },
+    "mainImages": {
+      "bsonType": "array",
+      "description": "主轮播图",
+      "title": "主轮播图",
+      "items": {
+        "bsonType": "string"
+      }
+    },
+    "sceneImages": {
+      "bsonType": "array",
+      "description": "实景图展示",
+      "title": "实景图展示",
+      "items": {
+        "bsonType": "object",
+        "properties": {
+          "image": {
+            "bsonType": "string",
+            "description": "图片URL"
+          },
+          "productTag": {
+            "bsonType": "string",
+            "description": "产品标签"
+          }
+        }
+      }
+    },
+    "furnitureCategories": {
+      "bsonType": "array",
+      "description": "家具分类",
+      "title": "家具分类",
+      "items": {
+        "bsonType": "object",
+        "properties": {
+          "name": {
+            "bsonType": "string",
+            "description": "分类名称"
+          },
+          "products": {
+            "bsonType": "array",
+            "description": "产品列表",
+            "items": {
+              "bsonType": "object",
+              "properties": {
+                "name": {
+                  "bsonType": "string",
+                  "description": "产品名称"
+                },
+                "description": {
+                  "bsonType": "string",
+                  "description": "产品描述"
+                },
+                "price": {
+                  "bsonType": "string",
+                  "description": "产品价格"
+                },
+                "image": {
+                  "bsonType": "string",
+                  "description": "产品图片"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "designerSuggestions": {
+      "bsonType": "array",
+      "description": "设计师建议",
+      "title": "设计师建议",
+      "items": {
+        "bsonType": "string"
+      }
+    },
+    "colorPalette": {
+      "bsonType": "array",
+      "description": "色彩搭配",
+      "title": "色彩搭配",
+      "items": {
+        "bsonType": "object",
+        "properties": {
+          "name": {
+            "bsonType": "string",
+            "description": "颜色名称"
+          },
+          "hex": {
+            "bsonType": "string",
+            "description": "颜色值"
+          }
+        }
+      }
+    },
+    "overallRating": {
+      "bsonType": "double",
+      "description": "总体评分",
+      "title": "总体评分",
+      "defaultValue": 4.5
+    },
+    "userReviews": {
+      "bsonType": "array",
+      "description": "用户评价",
+      "title": "用户评价",
+      "items": {
+        "bsonType": "object",
+        "properties": {
+          "username": {
+            "bsonType": "string",
+            "description": "用户名"
+          },
+          "avatar": {
+            "bsonType": "string",
+            "description": "头像"
+          },
+          "rating": {
+            "bsonType": "int",
+            "description": "评分"
+          },
+          "content": {
+            "bsonType": "string",
+            "description": "评价内容"
+          },
+          "images": {
+            "bsonType": "array",
+            "description": "评价图片",
+            "items": {
+              "bsonType": "string"
+            }
+          }
+        }
+      }
+    },
+    "similarCases": {
+      "bsonType": "array",
+      "description": "相似案例",
+      "title": "相似案例",
+      "items": {
+        "bsonType": "object",
+        "properties": {
+          "name": {
+            "bsonType": "string",
+            "description": "案例名称"
+          },
+          "image": {
+            "bsonType": "string",
+            "description": "案例图片"
+          },
+          "caseId": {
+            "bsonType": "string",
+            "description": "案例ID"
+          }
+        }
+      }
+    },
+    "isFavorite": {
+      "bsonType": "bool",
+      "description": "是否收藏",
+      "title": "是否收藏",
+      "defaultValue": false
+    },
+    "viewCount": {
+      "bsonType": "int",
+      "description": "浏览次数",
+      "title": "浏览次数",
+      "defaultValue": 0
+    },
+    "create_date": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

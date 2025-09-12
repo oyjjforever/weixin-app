@@ -24,10 +24,10 @@
       <text class="product-name">{{ productInfo.name }}</text>
       <view class="price-section">
         <text class="price-symbol">¥</text>
-        <text class="price-value">2899</text>
+        <text class="price-value">{{ productInfo.price }}</text>
       </view>
       <view class="stats-section">
-        <text class="sales">月销 2356</text>
+        <text class="sales">月销 {{ productInfo.sales }}</text>
         <view class="rating">
           <uni-icons type="star-filled" size="14" color="#FFB800"/>
           <text class="rating-value">{{ productInfo.rating }}</text>
@@ -48,15 +48,15 @@
         </view>
         <view class="spec-item">
           <text class="spec-label">尺寸：</text>
-          <text class="spec-value">140*80*75cm（长*宽*高）</text>
+          <text class="spec-value">{{ productInfo.size }}</text>
         </view>
         <view class="spec-item">
           <text class="spec-label">材质：</text>
-          <text class="spec-value">进口白橡木</text>
+          <text class="spec-value">{{ productInfo.material }}</text>
         </view>
         <view class="spec-item">
           <text class="spec-label">颜色：</text>
-          <text class="spec-value">原木色、胡桃色</text>
+          <text class="spec-value">{{ productInfo.color }}</text>
         </view>
       </view>
 
@@ -65,11 +65,7 @@
           <text>产品特点</text>
         </view>
         <view class="tag-container">
-          <text class="tag">环保材质</text>
-          <text class="tag">防水耐磨</text>
-          <text class="tag">简约时尚</text>
-          <text class="tag">结实耐用</text>
-          <text class="tag">易清洁</text>
+          <text class="tag" v-for="tag in productInfo.features" :key="tag">{{ tag }}</text>
         </view>
       </view>
 
@@ -77,7 +73,7 @@
         <view class="card-title">
           <text>适用场景</text>
         </view>
-        <text class="scene-desc">适合餐厅、客厅、书房等多种场景，特别适合追求简约北欧风格的家居环境。桌面采用特殊工艺处理，防水防污，日常维护简单方便。</text>
+        <text class="scene-desc">{{ productInfo.sceneDesc }}</text>
       </view>
     </view>
   </view>
@@ -87,20 +83,45 @@
 import { ref, onMounted } from 'vue';
 
 // 产品信息
-const productInfo = ref({
-  id: '',
-  name: '北欧简约实木餐桌椅组合',
-  image: '',
-  description: '采用进口白橡木材质，简约大气的北欧风格设计，适合多种家居风格，打造温馨舒适的用餐环境。',
-  designer: '设计师',
-  rating: '4.8'
-});
+const productInfo = ref();
 
-const swiperList = ref([
-  'https://ai-public.mastergo.com/ai/img_res/1c1e7a581bc7d9c42ef0bb607f629998.jpg',
-  'https://ai-public.mastergo.com/ai/img_res/c84ea737066317a8897310195bdc631f.jpg',
-  'https://ai-public.mastergo.com/ai/img_res/9d886b79a87c8166e8abefb2781eee5c.jpg'
-]);
+const swiperList = ref([]);
+
+// 获取产品详情数据
+const getProductDetail = async (productId: string) => {
+  try {
+    const result = await uniCloud.callFunction({
+      name: 'getProductDetail',
+      data: { id: productId }
+    });
+    
+    if (result.result.code === 0) {
+      const product = result.result.data;
+      productInfo.value = {
+        id: product._id,
+        name: product.name,
+        image: product.image,
+        description: product.description,
+        designer: product.designer,
+        rating: product.rating,
+        price: product.price,
+        sales: product.sales,
+        size: product.size,
+        material: product.material,
+        color: product.color,
+        features: product.features || [],
+        sceneDesc: product.sceneDesc
+      };
+      
+      // 如果有产品图片，添加到轮播图中
+      if (product.image) {
+        swiperList.value.unshift(product.image);
+      }
+    }
+  } catch (error) {
+    console.error('获取产品详情失败:', error);
+  }
+};
 
 // 获取页面参数
 onMounted(() => {
@@ -108,20 +129,9 @@ onMounted(() => {
   const currentPage = pages[pages.length - 1];
   const options = currentPage.options;
   
-  if (options) {
-    productInfo.value = {
-      id: options.id || '',
-      name: decodeURIComponent(options.name || '北欧简约实木餐桌椅组合'),
-      image: decodeURIComponent(options.image || ''),
-      description: decodeURIComponent(options.description || '采用进口白橡木材质，简约大气的北欧风格设计，适合多种家居风格，打造温馨舒适的用餐环境。'),
-      designer: decodeURIComponent(options.designer || '设计师'),
-      rating: options.rating || '4.8'
-    };
-    
-    // 如果有传入的图片，添加到轮播图中
-    if (productInfo.value.image) {
-      swiperList.value.unshift(productInfo.value.image);
-    }
+  if (options && options.id) {
+    // 如果有产品ID，通过云函数获取详情
+    getProductDetail(options.id);
   }
 });
 

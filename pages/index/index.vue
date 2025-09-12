@@ -12,7 +12,7 @@
     </view>
 
     <!-- 轮播图区域 -->
-    <view class="swiper-section">
+    <view class="swiper-section" v-if="swiperList.length > 0">
       <swiper class="swiper" circular autoplay interval="3000">
         <swiper-item v-for="(item, index) in swiperList" :key="index">
           <view class="swiper-item">
@@ -29,6 +29,14 @@
       </swiper>
     </view>
 
+    <!-- 轮播图空状态 -->
+    <view class="swiper-empty" v-else-if="!loading">
+      <view class="empty-banner">
+        <uni-icons type="image" size="48" color="#d9d9d9"/>
+        <text class="empty-banner-text">暂无轮播内容</text>
+      </view>
+    </view>
+
     <!-- 热门推荐 -->
     <view class="recommend-section">
       <view class="section-header">
@@ -36,6 +44,7 @@
         <text class="see-all" @click="viewCaseList">查看案例</text>
       </view>
       <scroll-view class="product-list" scroll-y>
+        <!-- 产品列表 -->
         <view v-for="(item, index) in productList" :key="index" class="product-card" @click="goToDetail(item)">
           <image class="product-image" :src="item.image" mode="aspectFill"></image>
           <view class="product-info">
@@ -60,6 +69,24 @@
             <uni-icons :type="item.isFavorite ? 'heart-filled' : 'heart'" size="20" color="#ff4757"></uni-icons>
           </view>
         </view>
+
+        <!-- 产品列表空状态 -->
+        <view class="product-empty" v-if="productList.length === 0 && !loading">
+          <view class="empty-content">
+            <uni-icons type="shop" size="64" color="#d9d9d9"/>
+            <text class="empty-title">暂无推荐产品</text>
+            <text class="empty-desc">当前没有可展示的产品信息</text>
+            <view class="empty-action" @click="refreshData">
+              <text class="action-text">重新加载</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 加载状态 -->
+        <view class="loading-state" v-if="loading">
+          <uni-icons type="spinner-cycle" size="32" color="#999"/>
+          <text class="loading-text">加载中...</text>
+        </view>
       </scroll-view>
     </view>
 
@@ -68,63 +95,54 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
-const swiperList = ref([
-  {
-    image: 'https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg',
-    title: '现代简约客厅',
-    description: '打造舒适优雅的生活空间，细节彰显品质',
-    isFavorite: true
-  },
-  {
-    image: 'https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg',
-    title: '精致厨房设计',
-    description: '高端定制厨房，让烹饪更有格调',
-    isFavorite: false
-  }
-]);
+const swiperList = ref([]);
+const productList = ref([]);
+const loading = ref(false);
 
-const productList = ref([
-  {
-    id: 1,
-    image: 'https://ai-public.mastergo.com/ai/img_res/388e0156db63597b1973c1350cd9c481.jpg',
-    name: '北欧风卧室套装',
-    description: '简约舒适的卧室空间，采用环保材质，打造温馨睡眠环境',
-    designer: '张大师',
-    duration: '45天',
-    difficulty: '中等',
-    rating: '4.8',
-    isFavorite: true
-  },
-  {
-    id: 2,
-    image: 'https://ai-public.mastergo.com/ai/img_res/1e5fec8a19efbdfbefb12ee291ef018b.jpg',
-    name: '轻奢浴室组合',
-    description: '高品质卫浴空间，细节之处尽显品味',
-    designer: '李设计',
-    duration: '30天',
-    difficulty: '简单',
-    rating: '4.9',
-    isFavorite: false
-  },
-  {
-    id: 3,
-    image: 'https://ai-public.mastergo.com/ai/img_res/8879b790c22c0d5ff7111d49605bb460.jpg',
-    name: '现代餐厅系列',
-    description: '精选优质材料，打造时尚餐饮空间',
-    designer: '王工作室',
-    duration: '60天',
-    difficulty: '较难',
-    rating: '4.7',
-    isFavorite: false
+// 获取产品列表数据
+const getProductList = async () => {
+  loading.value = true;
+  try {
+    const result = await uniCloud.callFunction({
+      name: 'getProductList',
+      data: {
+        page: 1,
+        pageSize: 20
+      }
+    });
+    
+    if (result.result.code === 0) {
+      const { products, banners } = result.result.data;
+      productList.value = products || [];
+      swiperList.value = banners || [];
+    } else {
+      uni.showToast({
+        title: result.result.message || '获取数据失败',
+        icon: 'none'
+      });
+    }
+  } catch (error) {
+    console.error('获取产品列表失败:', error);
+    uni.showToast({
+      title: '网络错误，请重试',
+      icon: 'none'
+    });
+  } finally {
+    loading.value = false;
   }
-]);
+};
+
+// 页面加载时获取数据
+onMounted(() => {
+  getProductList();
+});
 
 // 跳转到产品详情页
 const goToDetail = (product: any) => {
   uni.navigateTo({
-    url: `/pages/index/detail?id=${product.id}&name=${encodeURIComponent(product.name)}&image=${encodeURIComponent(product.image)}&description=${encodeURIComponent(product.description)}&designer=${encodeURIComponent(product.designer)}&rating=${product.rating}`
+    url: `/pages/index/detail?id=${product._id || product.id}`
   });
 };
 
@@ -140,6 +158,11 @@ const viewCaseList = () => {
   uni.navigateTo({
     url: '/pages/case/index'
   });
+};
+
+// 刷新数据
+const refreshData = () => {
+  getProductList();
 };
 </script>
 
@@ -340,6 +363,96 @@ page {
   position: absolute;
   top: 30rpx;
   right: 30rpx;
+}
+
+/* 轮播图空状态 */
+.swiper-empty {
+  margin: 20rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.empty-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400rpx;
+  background-color: #f8f9fa;
+}
+
+.empty-banner-text {
+  margin-top: 20rpx;
+  font-size: 14px;
+  color: #999;
+}
+
+/* 产品列表空状态 */
+.product-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 400rpx;
+}
+
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 40rpx;
+}
+
+.empty-title {
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+  margin: 24rpx 0 16rpx;
+  text-align: center;
+}
+
+.empty-desc {
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+  line-height: 1.5;
+  margin-bottom: 40rpx;
+}
+
+.empty-action {
+  padding: 16rpx 32rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.empty-action:active {
+  background-color: #e8e8e8;
+  transform: scale(0.98);
+}
+
+.action-text {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 加载状态 */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60rpx 40rpx;
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 14px;
+  color: #999;
 }
 
 
