@@ -1,6 +1,12 @@
 
 <template>
   <view class="container">
+    <!-- 通知轮播图区域 -->
+    <NoticeSwiper
+      :noticeList="noticeList"
+      @click="handleNoticeClick"
+    />
+
     <!-- 顶部导航 -->
     <view class="header">
       <uni-icons type="back" size="24" color="#333"></uni-icons>
@@ -96,10 +102,30 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
+import NoticeSwiper from '@/components/NoticeSwiper.vue';
 
 const swiperList = ref([]);
 const productList = ref([]);
+const noticeList = ref([]);
 const loading = ref(false);
+
+// 获取通知列表数据
+const getNoticeList = async () => {
+  try {
+    const result = await uniCloud.callFunction({
+      name: 'getNoticeList',
+      data: {
+        limit: 5
+      }
+    });
+    
+    if (result.result.code === 0) {
+      noticeList.value = result.result.data.notices || [];
+    }
+  } catch (error) {
+    console.error('获取通知列表失败:', error);
+  }
+};
 
 // 获取产品列表数据
 const getProductList = async () => {
@@ -136,8 +162,73 @@ const getProductList = async () => {
 
 // 页面加载时获取数据
 onMounted(() => {
+  getNoticeList();
   getProductList();
 });
+
+// 处理通知点击
+const handleNoticeClick = (notice: any) => {
+  const { linkType, linkUrl, _id } = notice;
+  
+  switch (linkType) {
+    case 'page':
+      uni.navigateTo({
+        url: linkUrl,
+        fail: () => {
+          uni.switchTab({
+            url: linkUrl,
+            fail: () => {
+              uni.showToast({
+                title: '页面跳转失败',
+                icon: 'none'
+              });
+            }
+          });
+        }
+      });
+      break;
+    case 'url':
+      // #ifdef H5
+      window.open(linkUrl, '_blank');
+      // #endif
+      // #ifndef H5
+      uni.showModal({
+        title: '提示',
+        content: '是否在浏览器中打开链接？',
+        success: (res) => {
+          if (res.confirm) {
+            plus.runtime.openURL(linkUrl);
+          }
+        }
+      });
+      // #endif
+      break;
+    case 'product':
+      uni.navigateTo({
+        url: `/pages/index/detail?id=${linkUrl}`,
+        fail: () => {
+          uni.showToast({
+            title: '产品详情跳转失败',
+            icon: 'none'
+          });
+        }
+      });
+      break;
+    case 'none':
+    default:
+      // 跳转到通知详情页
+      uni.navigateTo({
+        url: `/pages/notice/detail?id=${_id}`,
+        fail: () => {
+          uni.showToast({
+            title: '通知详情跳转失败',
+            icon: 'none'
+          });
+        }
+      });
+      break;
+  }
+};
 
 // 跳转到产品详情页
 const goToDetail = (product: any) => {
@@ -162,6 +253,7 @@ const viewCaseList = () => {
 
 // 刷新数据
 const refreshData = () => {
+  getNoticeList();
   getProductList();
 };
 </script>

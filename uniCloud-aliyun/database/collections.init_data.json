@@ -1,0 +1,14 @@
+[
+  {
+    "collectionName": "products",
+    "description": "产品信息表"
+  },
+  {
+    "collectionName": "banners",
+    "description": "轮播图表"
+  },
+  {
+    "collectionName": "cases",
+    "description": "案例信息表"
+  }
+]

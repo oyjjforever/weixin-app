@@ -9,7 +9,7 @@
 		{
 			"path": "pages/index/detail",
 			"style": {
-				"navigationBarTitleText": "产品详情",
+				"navigationBarTitleText": "产品详情"
 			}
 		},
 		{
@@ -21,13 +21,20 @@
 		{
 			"path": "pages/case/detail",
 			"style": {
-				"navigationBarTitleText": "案例详情",
+				"navigationBarTitleText": "案例详情"
 			}
 		},
 		{
 			"path": "pages/contact/index",
 			"style": {
 				"navigationBarTitleText": "联系我们"
+			}
+		},
+		{
+			"path": "pages/notice/detail",
+			"style": {
+				"navigationBarTitleText": "通知详情",
+				"navigationStyle": "custom"
 			}
 		}
 	],

@@ -4,7 +4,8 @@
     "pages/index/detail",
     "pages/case/index",
     "pages/case/detail",
-    "pages/contact/index"
+    "pages/contact/index",
+    "pages/notice/detail"
   ],
   "window": {
     "navigationBarTextStyle": "black",

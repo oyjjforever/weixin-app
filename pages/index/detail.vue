@@ -1,4 +1,3 @@
-
 <template>
   <view class="container">
     <!-- 顶部导航区域 -->

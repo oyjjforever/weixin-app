@@ -1,0 +1,10 @@
+{
+  "name": "deleteNotification",
+  "version": "1.0.0",
+  "description": "删除通知（管理端）",
+  "main": "index.js",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "bsonType": "object",
+  "required": ["title", "content", "type", "status"],
+  "properties": {
+    "_id": {
+      "description": "ID，系统自动生成"
+    },
+    "title": {
+      "bsonType": "string",
+      "description": "通知标题",
+      "title": "通知标题",
+      "maxLength": 100
+    },
+    "content": {
+      "bsonType": "string",
+      "description": "通知详细内容",
+      "title": "通知内容",
+      "maxLength": 5000
+    },
+    "type": {
+      "bsonType": "string",
+      "description": "通知类型",
+      "title": "通知类型",
+      "enum": ["promotion", "announcement", "maintenance"]
+    },
+    "image": {
+      "bsonType": "string",
+      "description": "通知图片URL",
+      "title": "通知图片"
+    },
+    "linkUrl": {
+      "bsonType": "string",
+      "description": "跳转链接",
+      "title": "跳转链接"
+    },
+    "linkType": {
+      "bsonType": "string",
+      "description": "链接类型",
+      "title": "链接类型",
+      "enum": ["none", "page", "url", "product"],
+      "defaultValue": "none"
+    },
+    "priority": {
+      "bsonType": "int",
+      "description": "优先级1-10，数字越大优先级越高",
+      "title": "优先级",
+      "defaultValue": 5,
+      "minimum": 1,
+      "maximum": 10
+    },
+    "status": {
+      "bsonType": "string",
+      "description": "状态",
+      "title": "状态",
+      "enum": ["active", "inactive", "expired"],
+      "defaultValue": "active"
+    },
+    "startTime": {
+      "bsonType": "timestamp",
+      "description": "开始生效时间",
+      "title": "开始时间"
+    },
+    "endTime": {
+      "bsonType": "timestamp",
+      "description": "结束生效时间",
+      "title": "结束时间"
+    },
+    "sort": {
+      "bsonType": "int",
+      "description": "排序值，数字越小越靠前",
+      "title": "排序",
+      "defaultValue": 0
+    },
+    "create_date": {
+      "bsonType": "timestamp",
+      "description": "创建时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    },
+    "update_date": {
+      "bsonType": "timestamp",
+      "description": "更新时间",
+      "forceDefaultValue": {
+        "$env": "now"
+      }
+    }
+  }
+}

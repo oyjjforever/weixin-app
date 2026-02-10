@@ -1,0 +1,10 @@
+{
+  "name": "getNoticeList",
+  "version": "1.0.0",
+  "description": "获取通知列表",
+  "main": "index.js",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "title": "春季大促销活动",
+    "content": "全场家具低至7折，限时优惠，不容错过！活动时间：2026年2月1日-2026年2月28日。活动期间，购买指定产品还可享受额外优惠，详情请咨询客服。",
+    "type": "promotion",
+    "image": "https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg",
+    "linkUrl": "/pages/index/index",
+    "linkType": "page",
+    "priority": 9,
+    "status": "active",
+    "startTime": 1738368000000,
+    "endTime": 1772419200000,
+    "sort": 1,
+    "create_date": 1738368000000
+  },
+  {
+    "title": "系统维护通知",
+    "content": "系统将于2026年2月15日凌晨2:00-4:00进行维护升级，届时部分功能可能无法使用，请提前做好准备。维护期间给您带来的不便，敬请谅解。",
+    "type": "maintenance",
+    "priority": 8,
+    "status": "active",
+    "startTime": 1739488000000,
+    "endTime": 1771724800000,
+    "sort": 2,
+    "create_date": 1739488000000
+  },
+  {
+    "title": "新品上市公告",
+    "content": "全新北欧风系列家具现已上市，欢迎进店选购！新品采用环保材质，设计简约时尚，为您的家居生活增添一份温馨与舒适。",
+    "type": "announcement",
+    "image": "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg",
+    "linkUrl": "/pages/case/index",
+    "linkType": "page",
+    "priority": 7,
+    "status": "active",
+    "startTime": 1738368000000,
+    "endTime": 1775097600000,
+    "sort": 3,
+    "create_date": 1738368000000
+  },
+  {
+    "title": "限时秒杀活动",
+    "content": "精选商品限时秒杀，每天上午10点准时开抢！数量有限，先到先得。关注我们，不错过任何优惠机会。",
+    "type": "promotion",
+    "image": "https://ai-public.mastergo.com/ai/img_res/69081bc93ea52c6e4e8320cc48d37102.jpg",
+    "linkUrl": "/pages/index/index",
+    "linkType": "page",
+    "priority": 8,
+    "status": "active",
+    "startTime": 1738368000000,
+    "endTime": 1775097600000,
+    "sort": 4,
+    "create_date": 1738368000000
+  },
+  {
+    "title": "会员专享福利",
+    "content": "会员专享福利来袭！注册会员即送100元优惠券，消费满1000元升级VIP，享受更多专属优惠和服务。",
+    "type": "promotion",
+    "linkUrl": "/pages/index/index",
+    "linkType": "page",
+    "priority": 6,
+    "status": "active",
+    "startTime": 1738368000000,
+    "endTime": 1775097600000,
+    "sort": 5,
+    "create_date": 1738368000000
+  },
+  {
+    "title": "物流配送调整通知",
+    "content": "受天气影响，部分地区物流配送可能会有所延迟，预计延迟1-2天。我们会尽快安排发货，感谢您的理解与支持。",
+    "type": "announcement",
+    "priority": 5,
+    "status": "active",
+    "startTime": 1738368000000,
+    "endTime": 1775097600000,
+    "sort": 6,
+    "create_date": 1738368000000
+  },
+  {
+    "title": "周末特惠预告",
+    "content": "本周末将推出超值套餐优惠，沙发+茶几+电视柜组合仅需3999元！提前关注，活动开始第一时间抢购。",
+    "type": "promotion",
+    "image": "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg",
+    "linkUrl": "/pages/index/index",
+    "linkType": "page",
+    "priority": 7,
+    "status": "active",
+    "startTime": 1738368000000,
+    "endTime": 1775097600000,
+    "sort": 7,
+    "create_date": 1738368000000
+  }
+]

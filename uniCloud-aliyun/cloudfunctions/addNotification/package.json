@@ -1,0 +1,10 @@
+{
+  "name": "addNotification",
+  "version": "1.0.0",
+  "description": "添加通知（管理端）",
+  "main": "index.js",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}
