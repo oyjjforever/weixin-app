@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "通知详情",
   "navigationStyle": "custom",
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons"
+  }
 }

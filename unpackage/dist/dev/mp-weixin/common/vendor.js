@@ -88,6 +88,36 @@ const looseToNumber = (val) => {
   const n2 = parseFloat(val);
   return isNaN(n2) ? val : n2;
 };
+function normalizeStyle(value) {
+  if (isArray(value)) {
+    const res = {};
+    for (let i2 = 0; i2 < value.length; i2++) {
+      const item = value[i2];
+      const normalized = isString(item) ? parseStringStyle(item) : normalizeStyle(item);
+      if (normalized) {
+        for (const key in normalized) {
+          res[key] = normalized[key];
+        }
+      }
+    }
+    return res;
+  } else if (isString(value) || isObject(value)) {
+    return value;
+  }
+}
+const listDelimiterRE = /;(?![^(]*\))/g;
+const propertyDelimiterRE = /:([^]+)/;
+const styleCommentRE = /\/\*[^]*?\*\//g;
+function parseStringStyle(cssText) {
+  const ret = {};
+  cssText.replace(styleCommentRE, "").split(listDelimiterRE).forEach((item) => {
+    if (item) {
+      const tmp = item.split(propertyDelimiterRE);
+      tmp.length > 1 && (ret[tmp[0].trim()] = tmp[1].trim());
+    }
+  });
+  return ret;
+}
 function normalizeClass(value) {
   let res = "";
   if (isString(value)) {
@@ -5046,6 +5076,22 @@ function getCreateApp() {
     return my[method];
   }
 }
+function stringifyStyle(value) {
+  if (isString(value)) {
+    return value;
+  }
+  return stringify(normalizeStyle(value));
+}
+function stringify(styles) {
+  let ret = "";
+  if (!styles || isString(styles)) {
+    return ret;
+  }
+  for (const key in styles) {
+    ret += `${key.startsWith(`--`) ? key : hyphenate(key)}:${styles[key]};`;
+  }
+  return ret;
+}
 function vOn(value, key) {
   const instance = getCurrentInstance();
   const ctx = instance.ctx;
@@ -5174,6 +5220,7 @@ function vFor(source, renderItem) {
 }
 const o$1 = (value, key) => vOn(value, key);
 const f$1 = (source, renderItem) => vFor(source, renderItem);
+const s$1 = (value) => stringifyStyle(value);
 const e$1 = (target, ...sources) => extend(target, ...sources);
 const n$1 = (value) => normalizeClass(value);
 const t$1 = (val) => toDisplayString(val);
@@ -10875,5 +10922,6 @@ exports.onMounted = onMounted;
 exports.p = p$1;
 exports.ref = ref;
 exports.resolveComponent = resolveComponent;
+exports.s = s$1;
 exports.t = t$1;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map
