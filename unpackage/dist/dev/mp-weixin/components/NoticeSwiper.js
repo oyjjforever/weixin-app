@@ -12,7 +12,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "NoticeSwiper",
   props: {
     noticeList: { default: () => [] },
-    autoplay: { type: Boolean, default: true },
+    autoplay: { type: Boolean, default: false },
     interval: { default: 3e3 },
     vertical: { type: Boolean, default: false }
   },

@@ -8026,8 +8026,7 @@ const pages = [
   {
     path: "pages/notice/detail",
     style: {
-      navigationBarTitleText: "通知详情",
-      navigationStyle: "custom"
+      navigationBarTitleText: "通知详情"
     }
   }
 ];

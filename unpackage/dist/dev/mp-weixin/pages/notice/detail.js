@@ -137,11 +137,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     const goBack = () => {
       common_vendor.index.navigateBack();
     };
-    const handleShare = () => {
-      common_vendor.index.showShareMenu({
-        withShareTicket: true
-      });
-    };
     common_vendor.onMounted(() => {
       const pages = getCurrentPages();
       const currentPage = pages[pages.length - 1];
@@ -157,73 +152,61 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: common_vendor.p({
-          type: "back",
-          size: "24",
-          color: "#ffffff"
-        }),
-        b: common_vendor.o(goBack),
-        c: common_vendor.o(handleShare),
-        d: common_vendor.p({
-          type: "redo",
-          size: "24",
-          color: "#ffffff"
-        }),
-        e: noticeInfo.value
+        a: noticeInfo.value
       }, noticeInfo.value ? common_vendor.e({
-        f: common_vendor.t(getTypeText(noticeInfo.value.type)),
-        g: common_vendor.n("type-" + noticeInfo.value.type),
-        h: common_vendor.t(noticeInfo.value.title),
-        i: common_vendor.t(formatDate(noticeInfo.value.create_date)),
-        j: noticeInfo.value.endTime
+        b: common_vendor.t(getTypeText(noticeInfo.value.type)),
+        c: common_vendor.n("type-" + noticeInfo.value.type),
+        d: common_vendor.t(noticeInfo.value.title),
+        e: common_vendor.t(formatDate(noticeInfo.value.create_date)),
+        f: noticeInfo.value.endTime
       }, noticeInfo.value.endTime ? {
-        k: common_vendor.t(formatDate(noticeInfo.value.endTime))
+        g: common_vendor.t(formatDate(noticeInfo.value.endTime))
       } : {}, {
-        l: noticeInfo.value.image
+        h: noticeInfo.value.image
       }, noticeInfo.value.image ? {
-        m: noticeInfo.value.image,
-        n: common_vendor.o(previewImage)
+        i: noticeInfo.value.image,
+        j: common_vendor.o(previewImage)
       } : {}, {
-        o: common_vendor.t(noticeInfo.value.content),
-        p: noticeInfo.value.linkType && noticeInfo.value.linkType !== "none"
+        k: common_vendor.t(noticeInfo.value.content),
+        l: noticeInfo.value.linkType && noticeInfo.value.linkType !== "none"
       }, noticeInfo.value.linkType && noticeInfo.value.linkType !== "none" ? {
-        q: common_vendor.t(getActionText(noticeInfo.value.linkType)),
-        r: common_vendor.p({
+        m: common_vendor.t(getActionText(noticeInfo.value.linkType)),
+        n: common_vendor.p({
           type: "right",
           size: "18",
           color: "#ffffff"
         }),
-        s: common_vendor.o(handleLinkClick)
+        o: common_vendor.o(handleLinkClick)
       } : {}, {
-        t: common_vendor.p({
+        p: common_vendor.p({
           type: "calendar",
           size: "16",
           color: "#999"
         }),
-        v: common_vendor.t(formatDateTime(noticeInfo.value.create_date)),
-        w: noticeInfo.value.update_date && noticeInfo.value.update_date !== noticeInfo.value.create_date
+        q: common_vendor.t(formatDateTime(noticeInfo.value.create_date)),
+        r: noticeInfo.value.update_date && noticeInfo.value.update_date !== noticeInfo.value.create_date
       }, noticeInfo.value.update_date && noticeInfo.value.update_date !== noticeInfo.value.create_date ? {
-        x: common_vendor.p({
+        s: common_vendor.p({
           type: "refresh",
           size: "16",
           color: "#999"
         }),
-        y: common_vendor.t(formatDateTime(noticeInfo.value.update_date))
+        t: common_vendor.t(formatDateTime(noticeInfo.value.update_date))
       } : {}) : loading.value ? {
-        A: common_vendor.p({
+        w: common_vendor.p({
           type: "spinner-cycle",
           size: "48",
           color: "#999"
         })
       } : {
-        B: common_vendor.p({
+        x: common_vendor.p({
           type: "info",
           size: "64",
           color: "#d9d9d9"
         }),
-        C: common_vendor.o(goBack)
+        y: common_vendor.o(goBack)
       }, {
-        z: loading.value
+        v: loading.value
       });
     };
   }

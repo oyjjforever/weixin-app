@@ -14,6 +14,7 @@ page.data-v-0f737f11 {
   left: 0;
   right: 0;
   height: 88rpx;
+  padding-top: var(--status-bar-height);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -48,7 +49,7 @@ page.data-v-0f737f11 {
   gap: 40rpx;
 }
 .content-container.data-v-0f737f11 {
-  padding: 120rpx 30rpx 40rpx;
+  padding: 30rpx 40rpx;
   background-color: #ffffff;
   min-height: 100%;
 }
@@ -161,7 +162,7 @@ page.data-v-0f737f11 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 120rpx 40rpx;
+  padding: 40rpx;
 }
 .loading-text.data-v-0f737f11 {
   margin-top: 20rpx;
@@ -173,7 +174,7 @@ page.data-v-0f737f11 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 120rpx 40rpx;
+  padding: 40rpx;
 }
 .empty-text.data-v-0f737f11 {
   margin-top: 20rpx;

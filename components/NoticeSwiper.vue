@@ -73,7 +73,7 @@ const props = withDefaults(defineProps<{
   vertical?: boolean;
 }>(), {
   noticeList: () => [],
-  autoplay: true,
+  autoplay: false,
   interval: 3000,
   vertical: false
 });
@@ -135,6 +135,8 @@ const handleClick = (item: NoticeItem) => {
   padding: 0 20rpx;
   height: 100%;
   cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* 促销活动样式 */

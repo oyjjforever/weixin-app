@@ -1,7 +1,7 @@
 <template>
   <view class="container">
     <!-- 顶部导航区域 -->
-    <view class="nav-bar">
+    <!-- <view class="nav-bar">
       <view class="nav-left" @click="goBack">
         <uni-icons type="back" size="24" color="#ffffff"></uni-icons>
       </view>
@@ -11,7 +11,7 @@
       <view class="nav-right">
         <uni-icons type="redo" size="24" color="#ffffff" @click="handleShare"></uni-icons>
       </view>
-    </view>
+    </view> -->
 
     <!-- 通知内容区域 -->
     <view class="content-container" v-if="noticeInfo">
@@ -292,6 +292,7 @@ page {
   left: 0;
   right: 0;
   height: 88rpx;
+  padding-top: var(--status-bar-height);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -332,7 +333,7 @@ page {
 }
 
 .content-container {
-  padding: 120rpx 30rpx 40rpx;
+  padding: 30rpx 40rpx;
   background-color: #ffffff;
   min-height: 100%;
 }
@@ -466,7 +467,7 @@ page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 120rpx 40rpx;
+  padding: 40rpx;
 }
 
 .loading-text {
@@ -480,7 +481,7 @@ page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 120rpx 40rpx;
+  padding: 40rpx;
 }
 
 .empty-text {
