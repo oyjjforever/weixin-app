@@ -51,7 +51,7 @@
       <scroll-view class="product-list" scroll-y>
         <!-- 产品列表 -->
         <view v-for="(item, index) in productList" :key="index" class="product-card" @click="goToDetail(item)">
-          <image class="product-image" :src="item.image" mode="aspectFill"></image>
+          <image class="product-image" :src="getFirstImage(item.image)" mode="aspectFill"></image>
           <view class="product-info">
             <text class="product-name">{{ item.name }}</text>
             <text class="product-desc">{{ item.description }}</text>
@@ -254,6 +254,21 @@ const viewCaseList = () => {
 const refreshData = () => {
   getNoticeList();
   getProductList();
+};
+
+// 获取第一张图片
+const getFirstImage = (image: any) => {
+  if (!image) return '';
+  // 如果是数组，返回第一张图片
+  if (Array.isArray(image)) {
+    return image.length > 0 ? image[0] : '';
+  }
+  // 如果是对象（uni-file-picker格式），提取url
+  if (typeof image === 'object' && image.url) {
+    return image.url;
+  }
+  // 如果是字符串，直接返回
+  return image;
 };
 </script>
 

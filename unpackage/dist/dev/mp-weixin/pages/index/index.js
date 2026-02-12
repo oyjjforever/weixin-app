@@ -129,6 +129,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       getNoticeList();
       getProductList();
     };
+    const getFirstImage = (image) => {
+      if (!image)
+        return "";
+      if (Array.isArray(image)) {
+        return image.length > 0 ? image[0] : "";
+      }
+      if (typeof image === "object" && image.url) {
+        return image.url;
+      }
+      return image;
+    };
     return (_ctx, _cache) => {
       return common_vendor.e({
         a: common_vendor.o(handleNoticeClick),
@@ -155,7 +166,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         e: !loading.value,
         g: common_vendor.f(productList.value, (item, index, i0) => {
           return {
-            a: item.image,
+            a: getFirstImage(item.image),
             b: common_vendor.t(item.name),
             c: common_vendor.t(item.description),
             d: common_vendor.t(item.difficulty),

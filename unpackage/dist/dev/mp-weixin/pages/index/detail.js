@@ -37,11 +37,12 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             sceneDesc: product.sceneDesc
           };
           if (product.image) {
-            swiperList.value.unshift(product.image);
+            const images = Array.isArray(product.image) ? product.image : [product.image];
+            swiperList.value = images;
           }
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index/detail.vue:121", "获取产品详情失败:", error);
+        common_vendor.index.__f__("error", "at pages/index/detail.vue:123", "获取产品详情失败:", error);
       }
     };
     common_vendor.onMounted(() => {

@@ -174,8 +174,8 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       } : {
         n: common_vendor.f(noticeInfo.value.image, (img, index, i0) => {
           return {
-            a: img.url,
-            b: common_vendor.o(($event) => previewImage(img.url), index),
+            a: img,
+            b: common_vendor.o(($event) => previewImage(img), index),
             c: common_vendor.o(handleImageError, index),
             d: common_vendor.o(handleImageLoad, index),
             e: index

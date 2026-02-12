@@ -6146,7 +6146,7 @@ function populateParameters(fromRes, toRes) {
   let _SDKVersion = SDKVersion;
   const hostLanguage = (language || "").replace(/_/g, "-");
   const parameters = {
-    appId: "wx9a24d690a28a25e3",
+    appId: "__UNI__C54F0A0",
     appName: "lxjj-app",
     appVersion: "1.0.0",
     appVersionCode: "100",
@@ -6295,7 +6295,7 @@ const getAppBaseInfo = {
       hostName: _hostName,
       hostSDKVersion: SDKVersion,
       hostTheme: theme,
-      appId: "wx9a24d690a28a25e3",
+      appId: "__UNI__C54F0A0",
       appName: "lxjj-app",
       appVersion: "1.0.0",
       appVersionCode: "100",
@@ -8361,7 +8361,7 @@ function I(e2) {
 const S = true, b = "mp-weixin", T = I(define_process_env_UNI_SECURE_NETWORK_CONFIG_default), A = b, P = I('{"address":["127.0.0.1","192.168.10.108","10.17.18.72","192.168.126.1","169.254.196.49"],"servePort":7001,"debugPort":9001,"initialLaunchType":"local","skipFiles":["<node_internals>/**","D:/Program Files/HBuilderX/plugins/unicloud/**/*.js"]}'), C = I('[{"provider":"aliyun","spaceName":"aliyun","spaceId":"mp-c1bd4818-0faf-4319-9bf0-478b57f1982f","clientSecret":"ETwYp98X1EUTrPfB1gvKUg==","endpoint":"https://api.next.bspapp.com"}]') || [];
 let O = "";
 try {
-  O = "wx9a24d690a28a25e3";
+  O = "__UNI__C54F0A0";
 } catch (e2) {
 }
 let L = {};
@@ -10909,7 +10909,7 @@ let tr = new class {
 })();
 var nr = tr;
 var define_process_env_UNI_STATISTICS_CONFIG_default = { enable: true, version: "2", reportInterval: "86400" };
-var define_process_env_UNI_STAT_TITLE_JSON_default = { "pages/index/index": "首页", "pages/index/detail": "产品详情", "pages/case/index": "家具案例", "pages/case/detail": "案例详情", "pages/contact/index": "联系我们", "pages/notice/detail": "通知详情" };
+var define_process_env_UNI_STAT_TITLE_JSON_default = { "pages/index/index": "首页", "pages/index/detail": "产品详情", "pages/case/index": "客户案例", "pages/case/detail": "案例详情", "pages/contact/index": "联系我们", "pages/notice/detail": "通知详情" };
 var define_process_env_UNI_STAT_UNI_CLOUD_default = {};
 const sys = index.getSystemInfoSync();
 const STAT_VERSION = "4.66";
@@ -10919,7 +10919,7 @@ const PAGE_PVER_TIME = 1800;
 const APP_PVER_TIME = 300;
 const OPERATING_TIME = 10;
 const DIFF_TIME = 60 * 1e3 * 60 * 24;
-const appid = "wx9a24d690a28a25e3";
+const appid = "__UNI__C54F0A0";
 const dbSet = (name, value) => {
   let data = index.getStorageSync("$$STAT__DBDATA:" + appid) || {};
   if (!data) {
@@ -10957,7 +10957,7 @@ const dbRemove = (name) => {
 };
 const uniStatisticsConfig = define_process_env_UNI_STATISTICS_CONFIG_default;
 let statConfig = {
-  appid: "wx9a24d690a28a25e3"
+  appid: "__UNI__C54F0A0"
 };
 let titleJsons = {};
 titleJsons = define_process_env_UNI_STAT_TITLE_JSON_default;
@@ -11224,7 +11224,7 @@ const is_report_data = () => {
   });
 };
 const requestData = (done) => {
-  const appid2 = "wx9a24d690a28a25e3";
+  const appid2 = "__UNI__C54F0A0";
   let formData = {
     usv: STAT_VERSION,
     conf: JSON.stringify({

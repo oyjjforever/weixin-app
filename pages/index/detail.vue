@@ -112,9 +112,11 @@ const getProductDetail = async (productId: string) => {
         sceneDesc: product.sceneDesc
       };
       
-      // 如果有产品图片，添加到轮播图中
+      // 处理产品图片，支持多图轮播
       if (product.image) {
-        swiperList.value.unshift(product.image);
+        // 如果是数组，直接使用；如果是字符串，转换为数组
+        const images = Array.isArray(product.image) ? product.image : [product.image];
+        swiperList.value = images;
       }
     }
   } catch (error) {

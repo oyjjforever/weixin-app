@@ -55,10 +55,10 @@
         >
           <swiper-item v-for="(img, index) in noticeInfo.image" :key="index">
             <image
-              :src="img.url"
+              :src="img"
               mode="widthFix"
               class="notice-image"
-              @click="previewImage(img.url)"
+              @click="previewImage(img)"
               @error="handleImageError"
               @load="handleImageLoad"
             ></image>
