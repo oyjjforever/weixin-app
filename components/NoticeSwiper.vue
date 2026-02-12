@@ -73,8 +73,8 @@ const props = withDefaults(defineProps<{
   vertical?: boolean;
 }>(), {
   noticeList: () => [],
-  autoplay: false,
-  interval: 3000,
+  autoplay: true,
+  interval: 5000,
   vertical: false
 });
 

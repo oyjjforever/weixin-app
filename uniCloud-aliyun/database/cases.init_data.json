@@ -32,29 +32,13 @@
       {
         "name": "客厅家具",
         "products": [
-          {
-            "name": "北欧布艺沙发",
-            "description": "舒适透气，简约设计",
-            "price": "3299",
-            "image": "https://ai-public.mastergo.com/ai/img_res/388e0156db63597b1973c1350cd9c481.jpg"
-          },
-          {
-            "name": "实木茶几",
-            "description": "天然木纹，环保材质",
-            "price": "1299",
-            "image": "https://ai-public.mastergo.com/ai/img_res/1e5fec8a19efbdfbefb12ee291ef018b.jpg"
-          }
+          "698ad4a7f2949c5b6d52414b","698ad4a7f2949c5b6d52414c"
         ]
       },
       {
         "name": "餐厅家具",
         "products": [
-          {
-            "name": "现代餐桌椅",
-            "description": "简约时尚，实用美观",
-            "price": "2899",
-            "image": "https://ai-public.mastergo.com/ai/img_res/8879b790c22c0d5ff7111d49605bb460.jpg"
-          }
+         "698ad4a7f2949c5b6d52414d"
         ]
       }
     ],
@@ -122,12 +106,7 @@
       {
         "name": "客厅家具",
         "products": [
-          {
-            "name": "北欧简约沙发",
-            "description": "清新自然，舒适实用",
-            "price": "2899",
-            "image": "https://ai-public.mastergo.com/ai/img_res/64153c8d255ea1f3bc247cc53467c7fc.jpg"
-          }
+          "698ad4a7f2949c5b6d52414a"
         ]
       }
     ],

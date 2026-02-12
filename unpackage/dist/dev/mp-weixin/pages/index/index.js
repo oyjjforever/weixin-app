@@ -28,7 +28,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           noticeList.value = result.result.data.notices || [];
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index/index.vue:126", "获取通知列表失败:", error);
+        common_vendor.index.__f__("error", "at pages/index/index.vue:125", "获取通知列表失败:", error);
       }
     };
     const getProductList = async () => {
@@ -52,7 +52,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           });
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/index/index.vue:153", "获取产品列表失败:", error);
+        common_vendor.index.__f__("error", "at pages/index/index.vue:152", "获取产品列表失败:", error);
         common_vendor.index.showToast({
           title: "网络错误，请重试",
           icon: "none"
@@ -125,11 +125,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         url: `/pages/index/detail?id=${product._id || product.id}`
       });
     };
-    const viewCaseList = () => {
-      common_vendor.index.navigateTo({
-        url: "/pages/case/index"
-      });
-    };
     const refreshData = () => {
       getNoticeList();
       getProductList();
@@ -140,89 +135,53 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         b: common_vendor.p({
           noticeList: noticeList.value
         }),
-        c: common_vendor.p({
-          type: "back",
-          size: "24",
-          color: "#333"
-        }),
-        d: common_vendor.p({
-          type: "search",
-          size: "24",
-          color: "#333"
-        }),
-        e: common_vendor.p({
-          type: "notification",
-          size: "24",
-          color: "#333"
-        }),
-        f: swiperList.value.length > 0
+        c: swiperList.value.length > 0
       }, swiperList.value.length > 0 ? {
-        g: common_vendor.f(swiperList.value, (item, index, i0) => {
+        d: common_vendor.f(swiperList.value, (item, index, i0) => {
           return {
             a: item.image,
             b: common_vendor.t(item.title),
             c: common_vendor.t(item.description),
-            d: "0a57c708-4-" + i0,
-            e: common_vendor.p({
-              type: item.isFavorite ? "heart-filled" : "heart",
-              size: "24",
-              color: "#ff4757"
-            }),
-            f: index
+            d: index
           };
         })
       } : !loading.value ? {
-        i: common_vendor.p({
+        f: common_vendor.p({
           type: "image",
           size: "48",
           color: "#d9d9d9"
         })
       } : {}, {
-        h: !loading.value,
-        j: common_vendor.o(viewCaseList),
-        k: common_vendor.f(productList.value, (item, index, i0) => {
+        e: !loading.value,
+        g: common_vendor.f(productList.value, (item, index, i0) => {
           return {
             a: item.image,
             b: common_vendor.t(item.name),
             c: common_vendor.t(item.description),
-            d: common_vendor.t(item.designer),
-            e: "0a57c708-6-" + i0,
-            f: common_vendor.t(item.duration),
-            g: common_vendor.t(item.difficulty),
-            h: "0a57c708-7-" + i0,
-            i: common_vendor.t(item.rating),
-            j: "0a57c708-8-" + i0,
-            k: common_vendor.p({
-              type: item.isFavorite ? "heart-filled" : "heart",
-              size: "20",
-              color: "#ff4757"
-            }),
-            l: index,
-            m: common_vendor.o(($event) => goToDetail(item), index)
+            d: common_vendor.t(item.difficulty),
+            e: "0a57c708-2-" + i0,
+            f: common_vendor.t(item.rating),
+            g: index,
+            h: common_vendor.o(($event) => goToDetail(item), index)
           };
         }),
-        l: common_vendor.p({
-          type: "calendar",
-          size: "14",
-          color: "#999"
-        }),
-        m: common_vendor.p({
+        h: common_vendor.p({
           type: "star",
           size: "14",
           color: "#ff4757"
         }),
-        n: productList.value.length === 0 && !loading.value
+        i: productList.value.length === 0 && !loading.value
       }, productList.value.length === 0 && !loading.value ? {
-        o: common_vendor.p({
+        j: common_vendor.p({
           type: "shop",
           size: "64",
           color: "#d9d9d9"
         }),
-        p: common_vendor.o(refreshData)
+        k: common_vendor.o(refreshData)
       } : {}, {
-        q: loading.value
+        l: loading.value
       }, loading.value ? {
-        r: common_vendor.p({
+        m: common_vendor.p({
           type: "spinner-cycle",
           size: "32",
           color: "#999"

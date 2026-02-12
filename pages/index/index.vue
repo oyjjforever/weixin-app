@@ -8,14 +8,14 @@
     />
 
     <!-- 顶部导航 -->
-    <view class="header">
+    <!-- <view class="header">
       <uni-icons type="back" size="24" color="#333"></uni-icons>
       <text class="title">品牌系列</text>
       <view class="header-right">
         <uni-icons type="search" size="24" color="#333"></uni-icons>
         <uni-icons type="notification" size="24" color="#333"></uni-icons>
       </view>
-    </view>
+    </view> -->
 
     <!-- 轮播图区域 -->
     <view class="swiper-section" v-if="swiperList.length > 0">
@@ -27,9 +27,9 @@
               <text class="swiper-title">{{ item.title }}</text>
               <text class="swiper-desc">{{ item.description }}</text>
             </view>
-            <view class="favorite-btn">
+            <!-- <view class="favorite-btn">
               <uni-icons :type="item.isFavorite ? 'heart-filled' : 'heart'" size="24" color="#ff4757"></uni-icons>
-            </view>
+            </view> -->
           </view>
         </swiper-item>
       </swiper>
@@ -47,7 +47,6 @@
     <view class="recommend-section">
       <view class="section-header">
         <text class="section-title">热门推荐</text>
-        <text class="see-all" @click="viewCaseList">查看案例</text>
       </view>
       <scroll-view class="product-list" scroll-y>
         <!-- 产品列表 -->
@@ -56,13 +55,13 @@
           <view class="product-info">
             <text class="product-name">{{ item.name }}</text>
             <text class="product-desc">{{ item.description }}</text>
-            <view class="product-meta">
+            <!-- <view class="product-meta">
               <text class="designer">设计师：{{ item.designer }}</text>
               <view class="duration">
                 <uni-icons type="calendar" size="14" color="#999"></uni-icons>
                 <text>{{ item.duration }}</text>
               </view>
-            </view>
+            </view> -->
             <view class="product-footer">
               <view class="difficulty">
                 <text>{{ item.difficulty }}</text>
@@ -71,9 +70,9 @@
               <text class="rating">{{ item.rating }}</text>
             </view>
           </view>
-          <view class="favorite-icon">
+          <!-- <view class="favorite-icon">
             <uni-icons :type="item.isFavorite ? 'heart-filled' : 'heart'" size="20" color="#ff4757"></uni-icons>
-          </view>
+          </view> -->
         </view>
 
         <!-- 产品列表空状态 -->

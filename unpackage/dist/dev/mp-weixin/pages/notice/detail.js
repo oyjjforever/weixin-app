@@ -29,7 +29,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           });
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/notice/detail.vue:123", "获取通知详情失败:", error);
+        common_vendor.index.__f__("error", "at pages/notice/detail.vue:153", "获取通知详情失败:", error);
         common_vendor.index.showToast({
           title: "网络错误，请重试",
           icon: "none"
@@ -63,24 +63,25 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       const day = String(date.getDate()).padStart(2, "0");
       return `${year}-${month}-${day}`;
     };
-    const formatDateTime = (timestamp) => {
-      if (!timestamp)
-        return "";
-      const date = new Date(timestamp);
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
-      const hours = String(date.getHours()).padStart(2, "0");
-      const minutes = String(date.getMinutes()).padStart(2, "0");
-      return `${year}-${month}-${day} ${hours}:${minutes}`;
+    const previewImage = (img) => {
+      if (!img)
+        return;
+      const urls = Array.isArray(img) ? img : [img];
+      const current = Array.isArray(img) ? img[0] : img;
+      common_vendor.index.previewImage({
+        urls,
+        current
+      });
     };
-    const previewImage = () => {
-      if (noticeInfo.value && noticeInfo.value.image) {
-        common_vendor.index.previewImage({
-          urls: [noticeInfo.value.image],
-          current: noticeInfo.value.image
-        });
-      }
+    const handleImageLoad = () => {
+      common_vendor.index.__f__("log", "at pages/notice/detail.vue:221", "图片加载成功");
+    };
+    const handleImageError = (e) => {
+      common_vendor.index.__f__("error", "at pages/notice/detail.vue:226", "图片加载失败:", e);
+      common_vendor.index.showToast({
+        title: "图片加载失败",
+        icon: "none"
+      });
     };
     const handleLinkClick = () => {
       if (!noticeInfo.value)
@@ -157,56 +158,55 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         b: common_vendor.t(getTypeText(noticeInfo.value.type)),
         c: common_vendor.n("type-" + noticeInfo.value.type),
         d: common_vendor.t(noticeInfo.value.title),
-        e: common_vendor.t(formatDate(noticeInfo.value.create_date)),
-        f: noticeInfo.value.endTime
+        e: noticeInfo.value.endTime
       }, noticeInfo.value.endTime ? {
+        f: common_vendor.t(formatDate(noticeInfo.value.startTime)),
         g: common_vendor.t(formatDate(noticeInfo.value.endTime))
       } : {}, {
         h: noticeInfo.value.image
-      }, noticeInfo.value.image ? {
-        i: noticeInfo.value.image,
-        j: common_vendor.o(previewImage)
-      } : {}, {
-        k: common_vendor.t(noticeInfo.value.content),
-        l: noticeInfo.value.linkType && noticeInfo.value.linkType !== "none"
+      }, noticeInfo.value.image ? common_vendor.e({
+        i: !Array.isArray(noticeInfo.value.image)
+      }, !Array.isArray(noticeInfo.value.image) ? {
+        j: noticeInfo.value.image,
+        k: common_vendor.o(previewImage),
+        l: common_vendor.o(handleImageError),
+        m: common_vendor.o(handleImageLoad)
+      } : {
+        n: common_vendor.f(noticeInfo.value.image, (img, index, i0) => {
+          return {
+            a: img.url,
+            b: common_vendor.o(($event) => previewImage(img.url), index),
+            c: common_vendor.o(handleImageError, index),
+            d: common_vendor.o(handleImageLoad, index),
+            e: index
+          };
+        })
+      }) : {}, {
+        o: common_vendor.t(noticeInfo.value.content),
+        p: noticeInfo.value.linkType && noticeInfo.value.linkType !== "none"
       }, noticeInfo.value.linkType && noticeInfo.value.linkType !== "none" ? {
-        m: common_vendor.t(getActionText(noticeInfo.value.linkType)),
-        n: common_vendor.p({
+        q: common_vendor.t(getActionText(noticeInfo.value.linkType)),
+        r: common_vendor.p({
           type: "right",
           size: "18",
           color: "#ffffff"
         }),
-        o: common_vendor.o(handleLinkClick)
-      } : {}, {
-        p: common_vendor.p({
-          type: "calendar",
-          size: "16",
-          color: "#999"
-        }),
-        q: common_vendor.t(formatDateTime(noticeInfo.value.create_date)),
-        r: noticeInfo.value.update_date && noticeInfo.value.update_date !== noticeInfo.value.create_date
-      }, noticeInfo.value.update_date && noticeInfo.value.update_date !== noticeInfo.value.create_date ? {
-        s: common_vendor.p({
-          type: "refresh",
-          size: "16",
-          color: "#999"
-        }),
-        t: common_vendor.t(formatDateTime(noticeInfo.value.update_date))
+        s: common_vendor.o(handleLinkClick)
       } : {}) : loading.value ? {
-        w: common_vendor.p({
+        v: common_vendor.p({
           type: "spinner-cycle",
           size: "48",
           color: "#999"
         })
       } : {
-        x: common_vendor.p({
+        w: common_vendor.p({
           type: "info",
           size: "64",
           color: "#d9d9d9"
         }),
-        y: common_vendor.o(goBack)
+        x: common_vendor.o(goBack)
       }, {
-        v: loading.value
+        t: loading.value
       });
     };
   }

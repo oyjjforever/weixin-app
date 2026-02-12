@@ -1,15 +1,15 @@
 <template>
   <view class="container">
     <!-- 顶部导航 -->
-    <view class="header">
+    <!-- <view class="header">
       <view class="nav-left" @click="goBack">
         <uni-icons type="back" size="24" color="#333"/>
       </view>
-      <text class="title">家具案例</text>
+      <text class="title">客户案例</text>
       <view class="nav-right">
         <uni-icons type="search" size="24" color="#333"/>
       </view>
-    </view>
+    </view> -->
 
     <!-- 筛选栏 -->
     <view class="filter-bar">

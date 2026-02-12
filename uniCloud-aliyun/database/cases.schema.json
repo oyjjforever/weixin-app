@@ -89,27 +89,9 @@
           },
           "products": {
             "bsonType": "array",
-            "description": "产品列表",
+            "description": "产品ID列表",
             "items": {
-              "bsonType": "object",
-              "properties": {
-                "name": {
-                  "bsonType": "string",
-                  "description": "产品名称"
-                },
-                "description": {
-                  "bsonType": "string",
-                  "description": "产品描述"
-                },
-                "price": {
-                  "bsonType": "string",
-                  "description": "产品价格"
-                },
-                "image": {
-                  "bsonType": "string",
-                  "description": "产品图片"
-                }
-              }
+              "bsonType": "string"
             }
           }
         }

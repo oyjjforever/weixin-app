@@ -24,16 +24,46 @@
       <view class="title-section">
         <text class="notice-title">{{ noticeInfo.title }}</text>
         <view class="notice-meta">
-          <text class="publish-time">发布时间：{{ formatDate(noticeInfo.create_date) }}</text>
           <text class="valid-time" v-if="noticeInfo.endTime">
-            有效期至：{{ formatDate(noticeInfo.endTime) }}
+            有效期：{{ formatDate(noticeInfo.startTime) }} ~ {{ formatDate(noticeInfo.endTime) }}
           </text>
         </view>
       </view>
 
       <!-- 通知图片 -->
       <view class="image-section" v-if="noticeInfo.image">
-        <image :src="noticeInfo.image" mode="widthFix" class="notice-image" @click="previewImage"></image>
+        <!-- 单张图片 -->
+        <image
+          v-if="!Array.isArray(noticeInfo.image)"
+          :src="noticeInfo.image"
+          mode="widthFix"
+          class="notice-image"
+          @click="previewImage"
+          @error="handleImageError"
+          @load="handleImageLoad"
+        ></image>
+        <!-- 多张图片轮播 -->
+        <swiper
+          v-else
+          class="image-swiper"
+          :autoplay="false"
+          :circular="false"
+          :indicator-dots="true"
+          indicator-color="rgba(255,255,255,0.5)"
+          indicator-active-color="#4facfe"
+          style="height: 700rpx;"
+        >
+          <swiper-item v-for="(img, index) in noticeInfo.image" :key="index">
+            <image
+              :src="img.url"
+              mode="widthFix"
+              class="notice-image"
+              @click="previewImage(img.url)"
+              @error="handleImageError"
+              @load="handleImageLoad"
+            ></image>
+          </swiper-item>
+        </swiper>
       </view>
 
       <!-- 通知内容 -->
@@ -50,7 +80,7 @@
       </view>
 
       <!-- 底部信息 -->
-      <view class="footer-section">
+      <!-- <view class="footer-section">
         <view class="footer-item">
           <uni-icons type="calendar" size="16" color="#999"></uni-icons>
           <text class="footer-text">创建于：{{ formatDateTime(noticeInfo.create_date) }}</text>
@@ -59,7 +89,7 @@
           <uni-icons type="refresh" size="16" color="#999"></uni-icons>
           <text class="footer-text">更新于：{{ formatDateTime(noticeInfo.update_date) }}</text>
         </view>
-      </view>
+      </view> -->
     </view>
 
     <!-- 加载状态 -->
@@ -173,13 +203,31 @@ const formatDateTime = (timestamp?: number) => {
 };
 
 // 预览图片
-const previewImage = () => {
-  if (noticeInfo.value && noticeInfo.value.image) {
-    uni.previewImage({
-      urls: [noticeInfo.value.image],
-      current: noticeInfo.value.image
-    });
-  }
+const previewImage = (img?: string | string[]) => {
+  if (!img) return;
+  
+  // 处理单个图片或图片数组
+  const urls = Array.isArray(img) ? img : [img];
+  const current = Array.isArray(img) ? img[0] : img;
+  
+  uni.previewImage({
+    urls: urls,
+    current: current
+  });
+};
+
+// 图片加载成功
+const handleImageLoad = () => {
+  console.log('图片加载成功');
+};
+
+// 图片加载失败
+const handleImageError = (e: any) => {
+  console.error('图片加载失败:', e);
+  uni.showToast({
+    title: '图片加载失败',
+    icon: 'none'
+  });
 };
 
 // 处理链接点击
@@ -400,6 +448,45 @@ page {
   width: 100%;
   display: block;
   border-radius: 16rpx;
+  min-height: 300rpx;
+  background-color: #f5f5f5;
+}
+
+.image-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 10rpx 20rpx;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 8rpx;
+  margin-top: 10rpx;
+}
+
+.image-hint text {
+  font-size: 12px;
+  color: #999;
+}
+
+.image-swiper {
+  width: 100%;
+  border-radius: 16rpx;
+  overflow: hidden;
+  background-color: #f5f5f5;
+}
+
+.image-swiper ::v-deep .uni-swiper-dot {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background-color: rgba(255,255,255,0.3);
+}
+
+.image-swiper ::v-deep .uni-swiper-dot-active {
+  width: 16rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background-color: #4facfe;
 }
 
 .content-section {

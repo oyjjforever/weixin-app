@@ -65,9 +65,6 @@ const _sfc_defineComponent = common_vendor.defineComponent({
         loading.value = false;
       }
     };
-    const goBack = () => {
-      common_vendor.index.navigateBack();
-    };
     const selectFilter = (value) => {
       selectedFilter.value = value;
       currentPage.value = 1;
@@ -103,18 +100,7 @@ const _sfc_defineComponent = common_vendor.defineComponent({
     });
     return (_ctx, _cache) => {
       return common_vendor.e({
-        a: common_vendor.p({
-          type: "back",
-          size: "24",
-          color: "#333"
-        }),
-        b: common_vendor.o(goBack),
-        c: common_vendor.p({
-          type: "search",
-          size: "24",
-          color: "#333"
-        }),
-        d: common_vendor.f(filterOptions.value, (item, index, i0) => {
+        a: common_vendor.f(filterOptions.value, (item, index, i0) => {
           return {
             a: common_vendor.t(item.label),
             b: index,
@@ -122,67 +108,67 @@ const _sfc_defineComponent = common_vendor.defineComponent({
             d: common_vendor.o(($event) => selectFilter(item.value), index)
           };
         }),
-        e: common_vendor.f(caseList.value, (item, index, i0) => {
+        b: common_vendor.f(caseList.value, (item, index, i0) => {
           return {
             a: item.image,
             b: common_vendor.t(item.roomType),
             c: common_vendor.t(item.title),
             d: common_vendor.t(item.description),
-            e: "298d1d60-2-" + i0,
+            e: "298d1d60-0-" + i0,
             f: common_vendor.t(item.area),
-            g: "298d1d60-3-" + i0,
+            g: "298d1d60-1-" + i0,
             h: common_vendor.t(item.designer),
             i: common_vendor.t(item.price),
-            j: "298d1d60-4-" + i0,
+            j: "298d1d60-2-" + i0,
             k: common_vendor.o(($event) => viewDetail(item), index),
             l: index,
             m: common_vendor.o(($event) => viewDetail(item), index)
           };
         }),
-        f: common_vendor.p({
+        c: common_vendor.p({
           type: "home",
           size: "14",
           color: "#999"
         }),
-        g: common_vendor.p({
+        d: common_vendor.p({
           type: "person",
           size: "14",
           color: "#999"
         }),
-        h: common_vendor.p({
+        e: common_vendor.p({
           type: "right",
           size: "14",
           color: "#666"
         }),
-        i: hasMore.value
+        f: hasMore.value
       }, hasMore.value ? {} : caseList.value.length > 0 ? {} : {}, {
-        j: caseList.value.length > 0,
-        k: caseList.value.length === 0 && !loading.value
+        g: caseList.value.length > 0,
+        h: caseList.value.length === 0 && !loading.value
       }, caseList.value.length === 0 && !loading.value ? {
-        l: common_vendor.p({
+        i: common_vendor.p({
           type: "home",
           size: "80",
           color: "#d9d9d9"
         }),
-        m: common_vendor.o(resetFilter),
-        n: common_vendor.o(refreshCases)
+        j: common_vendor.o(resetFilter),
+        k: common_vendor.o(refreshCases)
       } : {}, {
-        o: loading.value && caseList.value.length === 0
+        l: loading.value && caseList.value.length === 0
       }, loading.value && caseList.value.length === 0 ? {
-        p: common_vendor.p({
+        m: common_vendor.p({
           type: "spinner-cycle",
           size: "40",
           color: "#999"
         })
       } : {}, {
-        q: common_vendor.o(loadMore),
-        r: common_vendor.p({
+        n: common_vendor.o(loadMore),
+        o: common_vendor.p({
           type: "up",
           size: "24",
           color: "#ffffff"
         }),
-        s: showBackToTop.value,
-        t: common_vendor.o(scrollToTop)
+        p: showBackToTop.value,
+        q: common_vendor.o(scrollToTop)
       });
     };
   }

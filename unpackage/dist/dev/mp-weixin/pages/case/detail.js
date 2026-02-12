@@ -76,7 +76,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           });
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/case/detail.vue:295", "获取案例详情失败:", error);
+        common_vendor.index.__f__("error", "at pages/case/detail.vue:296", "获取案例详情失败:", error);
         common_vendor.index.showToast({
           title: "网络错误，请重试",
           icon: "none"
@@ -84,16 +84,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       } finally {
         loading.value = false;
       }
-    };
-    const goBack = () => {
-      common_vendor.index.navigateBack();
-    };
-    const toggleFavorite = () => {
-      isFavorite.value = !isFavorite.value;
-      common_vendor.index.showToast({
-        title: isFavorite.value ? "收藏成功" : "取消收藏",
-        icon: "success"
-      });
     };
     const handleShare = () => {
       common_vendor.index.showShareMenu({
@@ -107,11 +97,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         current: urls[index]
       });
     };
-    const addToCart = (product) => {
-      common_vendor.index.showToast({
-        title: "已加入购物车",
-        icon: "success"
-      });
+    const viewProductDetail = (product) => {
+      if (product.id) {
+        common_vendor.index.navigateTo({
+          url: `/pages/index/detail?id=${product.id}`
+        });
+      } else {
+        common_vendor.index.showToast({
+          title: "产品信息不完整",
+          icon: "none"
+        });
+      }
     };
     const consultDesigner = () => {
       common_vendor.index.showToast({
@@ -124,18 +120,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         title: "查看更多评价",
         icon: "none"
       });
-    };
-    const viewSimilarCase = (caseItem) => {
-      if (caseItem.caseId) {
-        common_vendor.index.navigateTo({
-          url: `/pages/case/detail?id=${caseItem.caseId}`
-        });
-      } else {
-        common_vendor.index.showToast({
-          title: `查看${caseItem.name}`,
-          icon: "none"
-        });
-      }
     };
     const scrollToTop = () => {
       common_vendor.index.pageScrollTo({
@@ -167,29 +151,17 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           };
         }),
         b: common_vendor.p({
-          type: "back",
-          size: "24",
-          color: "#ffffff"
-        }),
-        c: common_vendor.o(goBack),
-        d: common_vendor.p({
-          type: isFavorite.value ? "heart-filled" : "heart",
-          size: "24",
-          color: "#ffffff"
-        }),
-        e: common_vendor.o(toggleFavorite),
-        f: common_vendor.p({
           type: "redo",
           size: "24",
           color: "#ffffff"
         }),
-        g: common_vendor.o(handleShare),
-        h: common_vendor.t(caseInfo.value.title),
-        i: common_vendor.t(caseInfo.value.roomType),
-        j: common_vendor.t(caseInfo.value.area),
-        k: common_vendor.t(caseInfo.value.style),
-        l: common_vendor.t(caseInfo.value.ownerIntro),
-        m: common_vendor.f(sceneImages.value, (item, index, i0) => {
+        c: common_vendor.o(handleShare),
+        d: common_vendor.t(caseInfo.value.title),
+        e: common_vendor.t(caseInfo.value.roomType),
+        f: common_vendor.t(caseInfo.value.area),
+        g: common_vendor.t(caseInfo.value.style),
+        h: common_vendor.t(caseInfo.value.ownerIntro),
+        i: common_vendor.f(sceneImages.value, (item, index, i0) => {
           return common_vendor.e({
             a: item.image,
             b: item.productTag
@@ -200,7 +172,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             e: common_vendor.o(($event) => previewImage(index), index)
           });
         }),
-        n: common_vendor.f(furnitureCategories.value, (category, categoryIndex, i0) => {
+        j: common_vendor.f(furnitureCategories.value, (category, categoryIndex, i0) => {
           return {
             a: common_vendor.t(category.name),
             b: common_vendor.f(category.products, (product, productIndex, i1) => {
@@ -209,40 +181,40 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
                 b: common_vendor.t(product.name),
                 c: common_vendor.t(product.description),
                 d: common_vendor.t(product.price),
-                e: common_vendor.o(($event) => addToCart(), productIndex),
-                f: productIndex
+                e: productIndex,
+                f: common_vendor.o(($event) => viewProductDetail(product), productIndex)
               };
             }),
             c: categoryIndex
           };
         }),
-        o: common_vendor.f(designerSuggestions.value, (tag, index, i0) => {
+        k: common_vendor.f(designerSuggestions.value, (tag, index, i0) => {
           return {
             a: common_vendor.t(tag),
             b: index
           };
         }),
-        p: common_vendor.f(colorPalette.value, (color, index, i0) => {
+        l: common_vendor.f(colorPalette.value, (color, index, i0) => {
           return {
             a: common_vendor.t(color.name),
             b: index,
             c: color.hex
           };
         }),
-        q: common_vendor.p({
+        m: common_vendor.p({
           type: "star-filled",
           size: "16",
           color: "#FFB800"
         }),
-        r: common_vendor.t(overallRating.value),
-        s: common_vendor.f(userReviews.value, (review, index, i0) => {
+        n: common_vendor.t(overallRating.value),
+        o: common_vendor.f(userReviews.value, (review, index, i0) => {
           return common_vendor.e({
             a: review.avatar,
             b: common_vendor.t(review.username),
             c: common_vendor.f(5, (star, k1, i1) => {
               return {
                 a: star,
-                b: "1447c843-4-" + i0 + "-" + i1,
+                b: "1447c843-2-" + i0 + "-" + i1,
                 c: common_vendor.p({
                   type: star <= review.rating ? "star-filled" : "star",
                   size: "12",
@@ -264,41 +236,20 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             g: index
           });
         }),
-        t: common_vendor.o(viewMoreReviews),
-        v: common_vendor.p({
+        p: common_vendor.o(viewMoreReviews),
+        q: common_vendor.p({
           type: "chat",
           size: "20",
           color: "#ffffff"
         }),
-        w: common_vendor.o(consultDesigner),
-        x: common_vendor.p({
-          type: isFavorite.value ? "heart-filled" : "heart",
-          size: "20",
-          color: "#ff4757"
-        }),
-        y: common_vendor.t(isFavorite.value ? "已收藏" : "收藏案例"),
-        z: common_vendor.o(toggleFavorite),
-        A: common_vendor.p({
-          type: "redo",
-          size: "20",
-          color: "#666"
-        }),
-        B: common_vendor.o(handleShare),
-        C: common_vendor.f(similarCases.value, (item, index, i0) => {
-          return {
-            a: item.image,
-            b: common_vendor.t(item.name),
-            c: index,
-            d: common_vendor.o(($event) => viewSimilarCase(item), index)
-          };
-        }),
-        D: common_vendor.p({
+        r: common_vendor.o(consultDesigner),
+        s: common_vendor.p({
           type: "up",
           size: "24",
           color: "#ffffff"
         }),
-        E: showBackToTop.value,
-        F: common_vendor.o(scrollToTop)
+        t: showBackToTop.value,
+        v: common_vendor.o(scrollToTop)
       };
     };
   }

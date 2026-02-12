@@ -11,13 +11,14 @@
       
       <!-- 悬浮导航栏 -->
       <view class="nav-overlay">
-        <view class="nav-left" @click="goBack">
+        <!-- <view class="nav-left" @click="goBack">
           <uni-icons type="back" size="24" color="#ffffff"/>
-        </view>
+        </view> -->
+        <view/>
         <view class="nav-right">
-          <view class="nav-btn" @click="toggleFavorite">
+          <!-- <view class="nav-btn" @click="toggleFavorite">
             <uni-icons :type="isFavorite ? 'heart-filled' : 'heart'" size="24" color="#ffffff"/>
-          </view>
+          </view> -->
           <view class="nav-btn" @click="handleShare">
             <uni-icons type="redo" size="24" color="#ffffff"/>
           </view>
@@ -72,7 +73,7 @@
         <view v-for="(category, categoryIndex) in furnitureCategories" :key="categoryIndex" class="category-group">
           <text class="category-title">{{ category.name }}</text>
           <scroll-view class="product-scroll" scroll-x>
-            <view class="product-item" v-for="(product, productIndex) in category.products" :key="productIndex">
+            <view class="product-item" v-for="(product, productIndex) in category.products" :key="productIndex" @click="viewProductDetail(product)">
               <image :src="product.image" mode="aspectFill" class="product-image"/>
               <view class="product-info">
                 <text class="product-name">{{ product.name }}</text>
@@ -81,9 +82,9 @@
                   <text class="price-symbol">¥</text>
                   <text class="price-value">{{ product.price }}</text>
                 </view>
-                <view class="add-cart-btn" @click="addToCart(product)">
+                <!-- <view class="add-cart-btn" @click="addToCart(product)">
                   <text>加入购物车</text>
-                </view>
+                </view> -->
               </view>
             </view>
           </scroll-view>
@@ -154,18 +155,18 @@
             <uni-icons type="chat" size="20" color="#ffffff"/>
             <text>咨询设计师</text>
           </view>
-          <view class="action-btn secondary" @click="toggleFavorite">
+          <!-- <view class="action-btn secondary" @click="toggleFavorite">
             <uni-icons :type="isFavorite ? 'heart-filled' : 'heart'" size="20" color="#ff4757"/>
             <text>{{ isFavorite ? '已收藏' : '收藏案例' }}</text>
-          </view>
-          <view class="action-btn secondary" @click="handleShare">
+          </view> -->
+          <!-- <view class="action-btn secondary" @click="handleShare">
             <uni-icons type="redo" size="20" color="#666"/>
             <text>分享</text>
-          </view>
+          </view> -->
         </view>
         
         <!-- 相似案例推荐 -->
-        <view class="similar-cases">
+        <!-- <view class="similar-cases">
           <text class="similar-title">相似案例推荐</text>
           <scroll-view class="similar-scroll" scroll-x>
             <view class="similar-item" v-for="(item, index) in similarCases" :key="index" @click="viewSimilarCase(item)">
@@ -173,7 +174,7 @@
               <text class="similar-name">{{ item.name }}</text>
             </view>
           </scroll-view>
-        </view>
+        </view> -->
       </view>
     </scroll-view>
 
@@ -334,6 +335,19 @@ const addToCart = (product: any) => {
     title: '已加入购物车',
     icon: 'success'
   });
+};
+
+const viewProductDetail = (product: any) => {
+  if (product.id) {
+    uni.navigateTo({
+      url: `/pages/index/detail?id=${product.id}`
+    });
+  } else {
+    uni.showToast({
+      title: '产品信息不完整',
+      icon: 'none'
+    });
+  }
 };
 
 const consultDesigner = () => {
