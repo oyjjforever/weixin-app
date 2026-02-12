@@ -76,7 +76,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
           });
         }
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/case/detail.vue:296", "获取案例详情失败:", error);
+        common_vendor.index.__f__("error", "at pages/case/detail.vue:295", "获取案例详情失败:", error);
         common_vendor.index.showToast({
           title: "网络错误，请重试",
           icon: "none"
@@ -84,11 +84,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
       } finally {
         loading.value = false;
       }
-    };
-    const handleShare = () => {
-      common_vendor.index.showShareMenu({
-        withShareTicket: true
-      });
     };
     const previewImage = (index) => {
       const urls = sceneImages.value.map((item) => item.image);
@@ -150,18 +145,12 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             b: index
           };
         }),
-        b: common_vendor.p({
-          type: "redo",
-          size: "24",
-          color: "#ffffff"
-        }),
-        c: common_vendor.o(handleShare),
-        d: common_vendor.t(caseInfo.value.title),
-        e: common_vendor.t(caseInfo.value.roomType),
-        f: common_vendor.t(caseInfo.value.area),
-        g: common_vendor.t(caseInfo.value.style),
-        h: common_vendor.t(caseInfo.value.ownerIntro),
-        i: common_vendor.f(sceneImages.value, (item, index, i0) => {
+        b: common_vendor.t(caseInfo.value.title),
+        c: common_vendor.t(caseInfo.value.roomType),
+        d: common_vendor.t(caseInfo.value.area),
+        e: common_vendor.t(caseInfo.value.style),
+        f: common_vendor.t(caseInfo.value.ownerIntro),
+        g: common_vendor.f(sceneImages.value, (item, index, i0) => {
           return common_vendor.e({
             a: item.image,
             b: item.productTag
@@ -172,7 +161,7 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             e: common_vendor.o(($event) => previewImage(index), index)
           });
         }),
-        j: common_vendor.f(furnitureCategories.value, (category, categoryIndex, i0) => {
+        h: common_vendor.f(furnitureCategories.value, (category, categoryIndex, i0) => {
           return {
             a: common_vendor.t(category.name),
             b: common_vendor.f(category.products, (product, productIndex, i1) => {
@@ -188,33 +177,33 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             c: categoryIndex
           };
         }),
-        k: common_vendor.f(designerSuggestions.value, (tag, index, i0) => {
+        i: common_vendor.f(designerSuggestions.value, (tag, index, i0) => {
           return {
             a: common_vendor.t(tag),
             b: index
           };
         }),
-        l: common_vendor.f(colorPalette.value, (color, index, i0) => {
+        j: common_vendor.f(colorPalette.value, (color, index, i0) => {
           return {
             a: common_vendor.t(color.name),
             b: index,
             c: color.hex
           };
         }),
-        m: common_vendor.p({
+        k: common_vendor.p({
           type: "star-filled",
           size: "16",
           color: "#FFB800"
         }),
-        n: common_vendor.t(overallRating.value),
-        o: common_vendor.f(userReviews.value, (review, index, i0) => {
+        l: common_vendor.t(overallRating.value),
+        m: common_vendor.f(userReviews.value, (review, index, i0) => {
           return common_vendor.e({
             a: review.avatar,
             b: common_vendor.t(review.username),
             c: common_vendor.f(5, (star, k1, i1) => {
               return {
                 a: star,
-                b: "1447c843-2-" + i0 + "-" + i1,
+                b: "1447c843-1-" + i0 + "-" + i1,
                 c: common_vendor.p({
                   type: star <= review.rating ? "star-filled" : "star",
                   size: "12",
@@ -236,20 +225,20 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
             g: index
           });
         }),
-        p: common_vendor.o(viewMoreReviews),
-        q: common_vendor.p({
+        n: common_vendor.o(viewMoreReviews),
+        o: common_vendor.p({
           type: "chat",
           size: "20",
           color: "#ffffff"
         }),
-        r: common_vendor.o(consultDesigner),
-        s: common_vendor.p({
+        p: common_vendor.o(consultDesigner),
+        q: common_vendor.p({
           type: "up",
           size: "24",
           color: "#ffffff"
         }),
-        t: showBackToTop.value,
-        v: common_vendor.o(scrollToTop)
+        r: showBackToTop.value,
+        s: common_vendor.o(scrollToTop)
       };
     };
   }

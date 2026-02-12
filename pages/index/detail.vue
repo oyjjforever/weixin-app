@@ -1,7 +1,7 @@
 <template>
   <view class="container">
     <!-- 顶部导航区域 -->
-    <view class="nav-bar">
+    <!-- <view class="nav-bar">
       <view class="nav-left">
         <uni-icons type="back" size="24" color="#ffffff" @click="goBack"/>
       </view>
@@ -9,7 +9,7 @@
         <uni-icons type="star" size="24" color="#ffffff" class="nav-icon" @click="toggleFavorite"/>
         <uni-icons type="redo" size="24" color="#ffffff" @click="handleShare"/>
       </view>
-    </view>
+    </view> -->
 
     <!-- 轮播图区域 -->
     <swiper class="swiper" :indicator-dots="true" :autoplay="false" :duration="500" @click="previewImage">
@@ -82,7 +82,7 @@
 import { ref, onMounted } from 'vue';
 
 // 产品信息
-const productInfo = ref();
+const productInfo = ref({});
 
 const swiperList = ref([]);
 

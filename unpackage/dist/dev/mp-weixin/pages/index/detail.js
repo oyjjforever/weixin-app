@@ -11,7 +11,7 @@ if (!Math) {
 const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
   __name: "detail",
   setup(__props) {
-    const productInfo = common_vendor.ref();
+    const productInfo = common_vendor.ref({});
     const swiperList = common_vendor.ref([]);
     const getProductDetail = async (productId) => {
       try {
@@ -52,20 +52,6 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
         getProductDetail(options.id);
       }
     });
-    const goBack = () => {
-      common_vendor.index.navigateBack();
-    };
-    const toggleFavorite = () => {
-      common_vendor.index.showToast({
-        title: "收藏成功",
-        icon: "success"
-      });
-    };
-    const handleShare = () => {
-      common_vendor.index.showShareMenu({
-        withShareTicket: true
-      });
-    };
     const previewImage = () => {
       common_vendor.index.previewImage({
         urls: swiperList,
@@ -74,52 +60,34 @@ const _sfc_main = /* @__PURE__ */ common_vendor.defineComponent({
     };
     return (_ctx, _cache) => {
       return {
-        a: common_vendor.o(goBack),
-        b: common_vendor.p({
-          type: "back",
-          size: "24",
-          color: "#ffffff"
-        }),
-        c: common_vendor.o(toggleFavorite),
-        d: common_vendor.p({
-          type: "star",
-          size: "24",
-          color: "#ffffff"
-        }),
-        e: common_vendor.o(handleShare),
-        f: common_vendor.p({
-          type: "redo",
-          size: "24",
-          color: "#ffffff"
-        }),
-        g: common_vendor.f(swiperList.value, (item, index, i0) => {
+        a: common_vendor.f(swiperList.value, (item, index, i0) => {
           return {
             a: item,
             b: index
           };
         }),
-        h: common_vendor.o(previewImage),
-        i: common_vendor.t(productInfo.value.name),
-        j: common_vendor.t(productInfo.value.price),
-        k: common_vendor.t(productInfo.value.sales),
-        l: common_vendor.p({
+        b: common_vendor.o(previewImage),
+        c: common_vendor.t(productInfo.value.name),
+        d: common_vendor.t(productInfo.value.price),
+        e: common_vendor.t(productInfo.value.sales),
+        f: common_vendor.p({
           type: "star-filled",
           size: "14",
           color: "#FFB800"
         }),
-        m: common_vendor.t(productInfo.value.rating),
-        n: common_vendor.t(productInfo.value.description),
-        o: common_vendor.t(productInfo.value.designer),
-        p: common_vendor.t(productInfo.value.size),
-        q: common_vendor.t(productInfo.value.material),
-        r: common_vendor.t(productInfo.value.color),
-        s: common_vendor.f(productInfo.value.features, (tag, k0, i0) => {
+        g: common_vendor.t(productInfo.value.rating),
+        h: common_vendor.t(productInfo.value.description),
+        i: common_vendor.t(productInfo.value.designer),
+        j: common_vendor.t(productInfo.value.size),
+        k: common_vendor.t(productInfo.value.material),
+        l: common_vendor.t(productInfo.value.color),
+        m: common_vendor.f(productInfo.value.features, (tag, k0, i0) => {
           return {
             a: common_vendor.t(tag),
             b: tag
           };
         }),
-        t: common_vendor.t(productInfo.value.sceneDesc)
+        n: common_vendor.t(productInfo.value.sceneDesc)
       };
     };
   }

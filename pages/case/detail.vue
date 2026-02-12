@@ -10,20 +10,19 @@
       </swiper>
       
       <!-- 悬浮导航栏 -->
-      <view class="nav-overlay">
-        <!-- <view class="nav-left" @click="goBack">
+      <!-- <view class="nav-overlay">
+        <view class="nav-left" @click="goBack">
           <uni-icons type="back" size="24" color="#ffffff"/>
-        </view> -->
-        <view/>
+        </view>
         <view class="nav-right">
-          <!-- <view class="nav-btn" @click="toggleFavorite">
+          <view class="nav-btn" @click="toggleFavorite">
             <uni-icons :type="isFavorite ? 'heart-filled' : 'heart'" size="24" color="#ffffff"/>
-          </view> -->
+          </view>
           <view class="nav-btn" @click="handleShare">
             <uni-icons type="redo" size="24" color="#ffffff"/>
           </view>
         </view>
-      </view>
+      </view> -->
       
       <!-- 案例基本信息 -->
       <view class="case-info-overlay">
